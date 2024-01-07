@@ -60,4 +60,9 @@ dependencies {
     implementation "androidx.room:room-runtime:2.4.1"
     kapt "androidx.room:room-compiler:2.4.1"
 
+    implementation 'com.google.code.gson:gson:2.10.1'
+
+    //neumorphism
+    implementation 'com.github.fornewid:neumorphism:0.3.0'
+
 }
