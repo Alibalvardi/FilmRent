@@ -10,7 +10,8 @@ data class Customer(
     val firstname: String,
     val lastname: String,
     val phoneNumber: String,
-    val Username: String,
+    val email: String,
+    val username: String,
     val password: String,
-    val amount : Int
+    val wallet : Int
 )

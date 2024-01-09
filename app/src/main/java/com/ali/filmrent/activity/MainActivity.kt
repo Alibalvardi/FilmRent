@@ -1,6 +1,6 @@
-package com.ali.filmrent
+package com.ali.filmrent.activity
 
-import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.ali.filmrent.dataClass.Actor
@@ -40,6 +40,15 @@ class MainActivity : AppCompatActivity() {
 //        }
 
 
+        binding.btnGoToManager.setOnClickListener {
+            val intent = Intent(this, ManagerLoginActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnGoToCustomer.setOnClickListener {
+            val intent = Intent(this, CustomerLoginActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun firstRun() {
