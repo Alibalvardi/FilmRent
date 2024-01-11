@@ -16,10 +16,11 @@
         <item name="colorSurface">@color/white</item>
     </style>
 
-    <style name="NeumorphismCard">
-        <item name="neumorph_cornerFamily">rounded</item>
-        <item name="neumorph_cornerSize">10dp</item>
+    <style name="myToolbar" parent="Theme.MaterialComponents">
+        <item name="fontFamily">@font/primary_bold</item>
+        <item name="android:textSize">24sp</item>
     </style>
+
 
 
 </resources>

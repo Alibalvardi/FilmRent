@@ -1,5 +1,6 @@
 package com.ali.filmrent.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -11,6 +12,7 @@ import com.ali.filmrent.databinding.LoginDialogBinding
 import com.ali.filmrent.databinding.SignupDialogBinding
 import com.ali.filmrent.roomDatabase.AppDatabase
 import com.ali.filmrent.roomDatabase.ManagerDao
+const val KEY_MANAGER_ID ="manager_id"
 
 class ManagerLoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -119,7 +121,12 @@ class ManagerLoginActivity : AppCompatActivity() {
                     if (managerDao.getPassword(user) != "0") {
                         if(managerDao.getPassword(user) == pass) {
                             dialog.dismiss()
-                            Toast.makeText(this, "login successfully", Toast.LENGTH_LONG).show()
+
+                            val intent = Intent(this, ManagerActivity::class.java)
+                            intent.putExtra(KEY_MANAGER_ID,managerDao.getId(user))
+                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            startActivity(intent)
+
                         }else{
                             Toast.makeText(this, "Password is wrong", Toast.LENGTH_LONG).show()
                         }

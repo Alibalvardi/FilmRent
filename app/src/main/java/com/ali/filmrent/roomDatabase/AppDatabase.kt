@@ -7,7 +7,7 @@ import com.ali.filmrent.dataClass.*
 @Database(
     version = 1,
     exportSchema = false,
-    entities = [Customer::class, Film::class, Manager::class, Store::class, Actor::class, BuyedInventory::class, Category::class, Language::class, Payment::class, Rental::class, RentedFilm::class]
+    entities = [Customer::class, Film::class, Manager::class, Store::class, Actor::class, BuyedInventory::class, Category::class, Language::class, Payment::class, Rental::class, RentedFilm::class, ImgStore::class]
 )
 @TypeConverters(FilmTypeConverters1::class, FilmTypeConverters2::class, FilmTypeConverters3::class)
 
@@ -16,13 +16,14 @@ abstract class AppDatabase : RoomDatabase() {
     abstract val filmDao: FilmDao
     abstract val managerDao: ManagerDao
     abstract val storeDao: StoreDao
-    abstract val actorDao:ActorDao
-    abstract val buyedInventoryDao:BuyedInventoryDao
-    abstract val categoryDao:CategoryDao
-    abstract val languageDao:LanguageDao
-    abstract val paymentDao:PaymentDao
-    abstract val rentalDao:RentalDao
-    abstract val rentedFilmDao:RentedFilmDao
+    abstract val actorDao: ActorDao
+    abstract val buyedInventoryDao: BuyedInventoryDao
+    abstract val categoryDao: CategoryDao
+    abstract val languageDao: LanguageDao
+    abstract val paymentDao: PaymentDao
+    abstract val rentalDao: RentalDao
+    abstract val rentedFilmDao: RentedFilmDao
+    abstract val imgStoreDao: ImgStoreDao
 
     companion object {
         private var database: AppDatabase? = null

@@ -1,5 +1,6 @@
 package com.ali.filmrent.dataClass
 
+import android.media.Rating
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverter
@@ -11,6 +12,8 @@ data class Store(
     val store_id :Int? =null ,
     val manager_id : Int ,
     val name : String ,
-    val phoneNumber : String
+    val rating: Float ,
+    val phoneNumber : String ,
+    val url : String
 
 )

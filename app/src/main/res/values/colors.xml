@@ -10,5 +10,6 @@
     <color name="black_light">#BE000000</color>
     <color name="gray_light">#D6D6D6</color>
     <color name="green">#12B31A</color>
+    <color name="yellow">#FFC107</color>
 
 </resources>

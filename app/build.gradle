@@ -65,4 +65,7 @@ dependencies {
     //neumorphism
     implementation 'com.github.fornewid:neumorphism:0.3.0'
 
+    // sweet alert dialog =>
+    implementation "com.github.f0ris.sweetalert:library:1.5.1"
+
 }
