@@ -1,6 +1,7 @@
 package com.ali.filmrent.roomDatabase
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.ali.filmrent.dataClass.Store
@@ -16,4 +17,8 @@ interface StoreDao {
 
     @Query("SELECT * FROM store")
     fun listOfAllStore() :List<Store>
+
+
+    @Delete
+    fun deleteStore(store: Store)
 }

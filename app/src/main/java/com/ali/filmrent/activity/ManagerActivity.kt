@@ -26,6 +26,8 @@ class ManagerActivity : AppCompatActivity() {
     private lateinit var managerDao: ManagerDao
     private lateinit var storeDao: StoreDao
     private lateinit var manager: Manager
+    private lateinit var store1: Store
+    private lateinit var store2: Store
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityManagerBinding.inflate(layoutInflater)
@@ -81,12 +83,67 @@ class ManagerActivity : AppCompatActivity() {
         }
 
 
+        binding.card1.setOnLongClickListener {
+            val dialog = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+            dialog.titleText = "delete store"
+            dialog.confirmText = "Delete"
+            dialog.cancelText = "cancel"
+            dialog.contentText = "delete "+ store1.name
+            dialog.setOnCancelListener {
+                dialog.dismiss()
+            }
+            dialog.setConfirmClickListener {
+                dialog.dismiss()
+                deleteStore(store1)
+                showStore(managerId)
+            }
+            dialog.show()
+            true
+        }
+        binding.card2.setOnLongClickListener {
+            val dialog = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+            dialog.titleText = "delete store"
+            dialog.confirmText = "Delete"
+            dialog.cancelText = "cancel"
+            dialog.contentText = "delete " + store1.name
+            dialog.setOnCancelListener {
+                dialog.dismiss()
+            }
+            dialog.setConfirmClickListener {
+                dialog.dismiss()
+                deleteStore(store2)
+                showStore(managerId)
+            }
+            dialog.show()
+            true
+        }
+
+
+
+
+        binding.card1.setOnClickListener {
+            binding.toolBarManager.title = store1.name.toString()
+        }
+
+        binding.card2.setOnClickListener {
+            binding.toolBarManager.title = store2.name.toString()
+        }
+
+
+    }
+
+    private fun deleteStore(store: Store) {
+        storeDao.deleteStore(store)
     }
 
     private fun showStore(managerId: Int) {
+
+        binding.card1.visibility = MaterialCardView.INVISIBLE
+        binding.card2.visibility = MaterialCardView.INVISIBLE
         val listOfStore = storeDao.listOfManagerStore(managerId)
 
         if (listOfStore.size == 2) {
+            store1 = listOfStore[0]
             Glide
                 .with(this)
                 .load(listOfStore[0].url)
@@ -97,6 +154,7 @@ class ManagerActivity : AppCompatActivity() {
             binding.ratingBar1.rating = listOfStore[0].rating
             binding.card1.visibility = MaterialCardView.VISIBLE
 
+            store2 = listOfStore[1]
             Glide
                 .with(this)
                 .load(listOfStore[1].url)
@@ -109,6 +167,7 @@ class ManagerActivity : AppCompatActivity() {
 
 
         } else if (listOfStore.size == 1) {
+            store1 = listOfStore[0]
             Glide
                 .with(this)
                 .load(listOfStore[0].url)
@@ -149,5 +208,6 @@ class ManagerActivity : AppCompatActivity() {
         }
         return true
     }
+
 
 }
