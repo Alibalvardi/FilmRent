@@ -37,11 +37,10 @@ class MainActivity : AppCompatActivity() {
         imgStoreDao = AppDatabase.getDatabase(this).imgStoreDao
 
 
-
         //for insert all film to database in first run
         val sharedPreferences = getSharedPreferences("firstRun", Context.MODE_PRIVATE)
         if (sharedPreferences.getBoolean("first_run", true)) {
-           firstRun()
+            firstRun()
             sharedPreferences.edit().putBoolean("first_run", false).apply()
         }
 
@@ -177,31 +176,44 @@ class MainActivity : AppCompatActivity() {
                 urlImg = "https://upload.wikimedia.org/wikipedia/en/thumb/f/f7/Sausage_Party_logo.png/220px-Sausage_Party_logo.png",
                 description = "A sausage strives to discover the truth about his existence."
             ), Film(
-                title = " The Shawshank Redemption",
-                yearOfRelease = 1994,
+                title = "The Holdovers",
+                yearOfRelease = 2023,
                 language = Language(name = "English"),
                 category = Category(name = "Drama"),
-                actor = Actor(name = "Tim Robbins"),
-                rating = 4.5f,
-                length = 144,
+                actor = Actor(name = "Paul Giamatti"),
+                rating = 4.0f,
+                length = 133,
                 rentDuration = 14,
                 rentPerDay = 2,
                 amount = 10,
-                urlImg = "https://upload.wikimedia.org/wikipedia/en/8/81/ShawshankRedemptionMoviePoster.jpg",
-                description = "Over the course of several years, two convicts form a friendship, seeking consolation and, eventually, redemption through basic compassion."
+                urlImg = "https://digimovie7.top/wp-content/uploads/2023/11/ylXrhRxZgs80gIBlfS97Xu73uCa.jpg",
+                description = "A cranky history teacher at a remote prep school is forced to remain on campus over the holidays with a troubled student who has no place to go."
             ), Film(
-                title = "Sausage Party",
-                yearOfRelease = 2016,
+                title = "The Godfather",
+                yearOfRelease = 1972,
                 language = Language(name = "English"),
-                category = Category(name = "Animation"),
-                actor = Actor(name = "Seth Rogen"),
-                rating = 3.0f,
-                length = 89,
+                category = Category(name = "Crime"),
+                actor = Actor(name = "AL Pacino"),
+                rating = 4.6f,
+                length = 175,
                 rentDuration = 14,
                 rentPerDay = 2,
                 amount = 10,
-                urlImg = "https://upload.wikimedia.org/wikipedia/en/thumb/f/f7/Sausage_Party_logo.png/220px-Sausage_Party_logo.png",
-                description = "A sausage strives to discover the truth about his existence."
+                urlImg = "https://digimovie7.top/wp-content/uploads/2020/05/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._UX500.jpg",
+                description = "Don Vito Corleone, head of a mafia family, decides to hand over his empire to his youngest son Michael. However, his decision unintentionally puts the lives of his loved ones in grave danger."
+            ), Film(
+                title = "12 Angry Men",
+                yearOfRelease = 1957,
+                language = Language(name = "English"),
+                category = Category(name = "Drama"),
+                actor = Actor(name = "Henry FondaLee"),
+                rating = 4.5f,
+                length = 96,
+                rentDuration = 14,
+                rentPerDay = 2,
+                amount = 10,
+                urlImg = "https://digimovie7.top/wp-content/uploads/2020/05/572.jpg",
+                description = "The jury in a New York City murder trial is frustrated by a single member whose skeptical caution forces them to more carefully consider the evidence before jumping to a hasty verdict."
             )
         )
         val urlStoreList = listOf(

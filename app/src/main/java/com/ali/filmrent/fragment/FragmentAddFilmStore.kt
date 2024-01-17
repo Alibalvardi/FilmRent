@@ -38,13 +38,14 @@ class FragmentAddFilmStore : Fragment(), FilmEvents {
         super.onViewCreated(view, savedInstanceState)
 
         filmDao = AppDatabase.getDatabase(this.requireContext()).filmDao
+        val store_id : Int = activity?.intent!!.getIntExtra(KEY_STORE_ID,0)
 
 
 
 
 
         val filmList = filmDao.getAllFilms()
-        val adapter = FilmAdapter(films = ArrayList(filmList), this)
+        val adapter = FilmAdapter(films = ArrayList(filmList), 0 ,this , AppDatabase.getDatabase(this.requireContext()))
         binding.recycleAddFilmStore.layoutManager =
             LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         binding.recycleAddFilmStore.adapter = adapter
