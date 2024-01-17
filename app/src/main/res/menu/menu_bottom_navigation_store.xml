@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_myFilm"
+        android:icon="@drawable/ic_my_film"
+        android:title="My film " />
+
+    <item
+        android:id="@+id/menu_add_film"
+        android:icon="@drawable/ic_add"
+        android:title="Add film" />
+
+    <item
+        android:id="@+id/menu_profile_store"
+        android:icon="@drawable/ic_store"
+        android:title="Profile" />
+
+
+</menu>

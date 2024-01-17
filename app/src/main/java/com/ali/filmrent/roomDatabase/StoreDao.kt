@@ -21,4 +21,10 @@ interface StoreDao {
 
     @Delete
     fun deleteStore(store: Store)
+    @Query("SELECT * FROM store WHERE store_id LIKE :storeId")
+    fun getStoreById(storeId: Int): Store
+    @Query("SELECT manager_id FROM store WHERE store_id LIKE :storeId")
+    fun getStoreManagerId(storeId: Int): Int
+
+
 }

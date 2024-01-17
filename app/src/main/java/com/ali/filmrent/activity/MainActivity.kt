@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //database
+//        database
         filmDao = AppDatabase.getDatabase(this).filmDao
         actorDao = AppDatabase.getDatabase(this).actorDao
         languageDao = AppDatabase.getDatabase(this).languageDao
@@ -37,10 +37,11 @@ class MainActivity : AppCompatActivity() {
         imgStoreDao = AppDatabase.getDatabase(this).imgStoreDao
 
 
+
         //for insert all film to database in first run
         val sharedPreferences = getSharedPreferences("firstRun", Context.MODE_PRIVATE)
         if (sharedPreferences.getBoolean("first_run", true)) {
-        firstRun()
+           firstRun()
             sharedPreferences.edit().putBoolean("first_run", false).apply()
         }
 
@@ -69,7 +70,8 @@ class MainActivity : AppCompatActivity() {
                 rentDuration = 14,
                 rentPerDay = 2,
                 amount = 10,
-                urlImg = "https://m.media-amazon.com/images/M/MV5BYjhiNjBlODctY2ZiOC00YjVlLWFlNzAtNTVhNzM1YjI1NzMxXkEyXkFqcGdeQXVyMjQxNTE1MDA@._V1_FMjpg_UX1000_.jpg"
+                urlImg = "https://m.media-amazon.com/images/M/MV5BYjhiNjBlODctY2ZiOC00YjVlLWFlNzAtNTVhNzM1YjI1NzMxXkEyXkFqcGdeQXVyMjQxNTE1MDA@._V1_FMjpg_UX1000_.jpg",
+                description = "Jake Sully lives with his newfound family formed on the extrasolar moon Pandora. Once a familiar threat returns to finish what was previously started, Jake must work with Neytiri and the army of the Na'vi race to protect their home."
             ), Film(
                 title = "Oppenheimer",
                 yearOfRelease = 2023,
@@ -81,7 +83,8 @@ class MainActivity : AppCompatActivity() {
                 rentDuration = 14,
                 rentPerDay = 2,
                 amount = 10,
-                urlImg = "https://movies.universalpictures.com/media/opr-tsr1sheet3-look2-rgb-3-1-1-64545c0d15f1e-1.jpg"
+                urlImg = "https://movies.universalpictures.com/media/opr-tsr1sheet3-look2-rgb-3-1-1-64545c0d15f1e-1.jpg",
+                description = "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb."
             ), Film(
                 title = "Deportees 2",
                 yearOfRelease = 2009,
@@ -93,7 +96,8 @@ class MainActivity : AppCompatActivity() {
                 rentDuration = 14,
                 rentPerDay = 2,
                 amount = 10,
-                urlImg = "https://www.uptvs.com/wp-contents/uploads/2020/04/59580.jpg"
+                urlImg = "https://www.uptvs.com/wp-contents/uploads/2020/04/59580.jpg",
+                description = "In this sequel the deportees are now captured by the Iraqis and are living in a camp. On the other hand their families who are going to Mashad are imprisoned when their airplane is hijacked by some terrorists who want to take it to Iraq. In the camp also they have to deal with the Iraqis who are imprisoned them."
             ), Film(
                 title = "Avengers: Endgame",
                 yearOfRelease = 2019,
@@ -105,7 +109,8 @@ class MainActivity : AppCompatActivity() {
                 rentDuration = 14,
                 rentPerDay = 2,
                 amount = 10,
-                urlImg = "https://m.media-amazon.com/images/I/512BgEoycmL._SX300_SY300_QL70_FMwebp_.jpg"
+                urlImg = "https://m.media-amazon.com/images/I/512BgEoycmL._SX300_SY300_QL70_FMwebp_.jpg",
+                description = "After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe."
             ), Film(
                 title = "La Haine",
                 yearOfRelease = 1995,
@@ -117,7 +122,8 @@ class MainActivity : AppCompatActivity() {
                 rentDuration = 14,
                 rentPerDay = 2,
                 amount = 10,
-                urlImg = "https://upload.wikimedia.org/wikipedia/en/3/30/Haine.jpg"
+                urlImg = "https://upload.wikimedia.org/wikipedia/en/3/30/Haine.jpg",
+                description = "24 hours in the lives of three young men in the French suburbs the day after a violent riot."
             ), Film(
                 title = "Dune",
                 yearOfRelease = 2021,
@@ -129,7 +135,8 @@ class MainActivity : AppCompatActivity() {
                 rentDuration = 14,
                 rentPerDay = 2,
                 amount = 10,
-                urlImg = "https://upload.wikimedia.org/wikipedia/en/8/8e/Dune_%282021_film%29.jpg"
+                urlImg = "https://upload.wikimedia.org/wikipedia/en/8/8e/Dune_%282021_film%29.jpg",
+                description = "A noble family becomes embroiled in a war for control over the galaxy's most valuable asset while its heir becomes troubled by visions of a dark future."
             ), Film(
                 title = "Fast X",
                 yearOfRelease = 2023,
@@ -141,7 +148,60 @@ class MainActivity : AppCompatActivity() {
                 rentDuration = 14,
                 rentPerDay = 2,
                 amount = 10,
-                urlImg = "https://m.media-amazon.com/images/I/815AmXUcB5L._AC_UF1000,1000_QL80_.jpg"
+                urlImg = "https://m.media-amazon.com/images/I/815AmXUcB5L._AC_UF1000,1000_QL80_.jpg",
+                description = "Dom Toretto and his family are targeted by the vengeful son of drug kingpin Hernan Reyes."
+            ), Film(
+                title = " The Shawshank Redemption",
+                yearOfRelease = 1994,
+                language = Language(name = "English"),
+                category = Category(name = "Drama"),
+                actor = Actor(name = "Tim Robbins"),
+                rating = 4.5f,
+                length = 144,
+                rentDuration = 14,
+                rentPerDay = 2,
+                amount = 10,
+                urlImg = "https://upload.wikimedia.org/wikipedia/en/8/81/ShawshankRedemptionMoviePoster.jpg",
+                description = "Over the course of several years, two convicts form a friendship, seeking consolation and, eventually, redemption through basic compassion."
+            ), Film(
+                title = "Sausage Party",
+                yearOfRelease = 2016,
+                language = Language(name = "English"),
+                category = Category(name = "Animation"),
+                actor = Actor(name = "Seth Rogen"),
+                rating = 3.0f,
+                length = 89,
+                rentDuration = 14,
+                rentPerDay = 2,
+                amount = 10,
+                urlImg = "https://upload.wikimedia.org/wikipedia/en/thumb/f/f7/Sausage_Party_logo.png/220px-Sausage_Party_logo.png",
+                description = "A sausage strives to discover the truth about his existence."
+            ), Film(
+                title = " The Shawshank Redemption",
+                yearOfRelease = 1994,
+                language = Language(name = "English"),
+                category = Category(name = "Drama"),
+                actor = Actor(name = "Tim Robbins"),
+                rating = 4.5f,
+                length = 144,
+                rentDuration = 14,
+                rentPerDay = 2,
+                amount = 10,
+                urlImg = "https://upload.wikimedia.org/wikipedia/en/8/81/ShawshankRedemptionMoviePoster.jpg",
+                description = "Over the course of several years, two convicts form a friendship, seeking consolation and, eventually, redemption through basic compassion."
+            ), Film(
+                title = "Sausage Party",
+                yearOfRelease = 2016,
+                language = Language(name = "English"),
+                category = Category(name = "Animation"),
+                actor = Actor(name = "Seth Rogen"),
+                rating = 3.0f,
+                length = 89,
+                rentDuration = 14,
+                rentPerDay = 2,
+                amount = 10,
+                urlImg = "https://upload.wikimedia.org/wikipedia/en/thumb/f/f7/Sausage_Party_logo.png/220px-Sausage_Party_logo.png",
+                description = "A sausage strives to discover the truth about his existence."
             )
         )
         val urlStoreList = listOf(

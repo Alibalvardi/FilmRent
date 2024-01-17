@@ -3,7 +3,6 @@ package com.ali.filmrent.dataClass
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverter
-import androidx.room.TypeConverters
 import com.google.gson.Gson
 
 @Entity
@@ -20,7 +19,8 @@ data class Film(
     val rentDuration: Int,
     val rentPerDay: Int,
     val amount: Int,
-    val urlImg: String
+    val urlImg: String,
+    val description : String
 )
 
 class FilmTypeConverters1 {

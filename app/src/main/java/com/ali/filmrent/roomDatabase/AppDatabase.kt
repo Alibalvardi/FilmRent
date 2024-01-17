@@ -7,7 +7,7 @@ import com.ali.filmrent.dataClass.*
 @Database(
     version = 1,
     exportSchema = false,
-    entities = [Customer::class, Film::class, Manager::class, Store::class, Actor::class, BuyedInventory::class, Category::class, Language::class, Payment::class, Rental::class, RentedFilm::class, ImgStore::class]
+    entities = [Customer::class, Film::class, Manager::class, Store::class, Actor::class, BoughtInventory::class, Category::class, Language::class, Payment::class, Rental::class, RentedFilm::class, ImgStore::class]
 )
 @TypeConverters(FilmTypeConverters1::class, FilmTypeConverters2::class, FilmTypeConverters3::class)
 
@@ -17,7 +17,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract val managerDao: ManagerDao
     abstract val storeDao: StoreDao
     abstract val actorDao: ActorDao
-    abstract val buyedInventoryDao: BuyedInventoryDao
+    abstract val boughtInventoryDao: BoughtInventoryDao
     abstract val categoryDao: CategoryDao
     abstract val languageDao: LanguageDao
     abstract val paymentDao: PaymentDao
@@ -32,7 +32,7 @@ abstract class AppDatabase : RoomDatabase() {
                 database = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "FoodDatabase.db"
+                    "AppDatabase.db"
                 )
                     .allowMainThreadQueries()
                     .build()

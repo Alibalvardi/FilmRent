@@ -20,6 +20,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.card.MaterialCardView
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
+const val KEY_STORE_ID = "key_store_id"
 
 class ManagerActivity : AppCompatActivity() {
     private lateinit var binding: ActivityManagerBinding
@@ -122,11 +123,15 @@ class ManagerActivity : AppCompatActivity() {
 
 
         binding.card1.setOnClickListener {
-            binding.toolBarManager.title = store1.name.toString()
+            val intent = Intent(this , StoreActivity::class.java)
+            intent.putExtra(KEY_STORE_ID,store1.store_id)
+            startActivity(intent)
         }
 
         binding.card2.setOnClickListener {
-            binding.toolBarManager.title = store2.name.toString()
+            val intent = Intent(this , StoreActivity::class.java)
+            intent.putExtra(KEY_STORE_ID,store2.store_id)
+            startActivity(intent)
         }
 
 
