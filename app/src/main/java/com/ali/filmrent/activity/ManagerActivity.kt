@@ -78,6 +78,9 @@ class ManagerActivity : AppCompatActivity() {
                             .show()
                     }
                 }
+                dialogBinding.btnCancel.setOnClickListener {
+                    dialog.dismiss()
+                }
             } else {
                 Toast.makeText(this, "You can only have 2 stores", Toast.LENGTH_LONG).show()
             }

@@ -12,6 +12,8 @@ interface BoughtInventoryDao {
 
     @Query("SELECT DISTINCT film_id FROM buyedInventory WHERE store_id LIKE :storeId")
     fun getStoreFilms(storeId: Int): List<Int>
+    @Query("SELECT film_id FROM buyedInventory WHERE store_id LIKE :storeId")
+    fun getStoreAllCopies(storeId: Int): List<Int>
 
     @Query("SELECT COUNT(*) FROM buyedInventory WHERE film_id LIKE :filmID AND store_id LIKE :storeId")
     fun countOfFilm(storeId: Int, filmID: Int): Int

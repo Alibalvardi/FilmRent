@@ -9,17 +9,17 @@
     android:padding="10dp">
 
     <TextView
+        android:id="@+id/txt_inf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:layout_marginStart="16dp"
         android:fontFamily="@font/primary_bold"
         android:text="add store"
         android:textColor="?attr/colorPrimary"
         android:textSize="24sp" />
-
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -32,8 +32,7 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
         android:hint="Store name :"
-        android:textColorHint="?attr/colorPrimary"
-        >
+        android:textColorHint="?attr/colorPrimary">
 
 
         <com.google.android.material.textfield.TextInputEditText
@@ -56,8 +55,7 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
         android:hint="Phone number :"
-        android:textColorHint="?attr/colorPrimary"
-        >
+        android:textColorHint="?attr/colorPrimary">
 
 
         <com.google.android.material.textfield.TextInputEditText
@@ -71,6 +69,24 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <FrameLayout
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="140dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="8dp"
+            android:text="cancel"
+            app:icon="@drawable/rectangle"
+            android:backgroundTint="@android:color/holo_red_light"/>
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnDone"
             android:layout_width="wrap_content"
@@ -82,7 +98,7 @@
             android:padding="8dp"
             android:text="add"
             app:icon="@drawable/rectangle" />
-
+    </FrameLayout>
 
 
 </LinearLayout>
