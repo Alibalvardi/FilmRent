@@ -14,7 +14,7 @@ import com.ali.filmrent.databinding.ActivityCustomerBinding
 import com.ali.filmrent.fragment.FragmentFilmsCustomer
 import com.ali.filmrent.fragment.FragmentMyFilmCustomer
 import com.ali.filmrent.fragment.FragmentMyProfileCustomer
-import com.ali.filmrent.fragment.FragmentMyStoresCustomer
+import com.ali.filmrent.fragment.FragmentStoresCustomer
 import com.ali.filmrent.roomDatabase.AppDatabase
 import com.ali.filmrent.roomDatabase.CustomerDao
 import com.google.android.material.navigation.NavigationBarView
@@ -56,7 +56,7 @@ class CustomerActivity : AppCompatActivity() {
                 }
 
                 R.id.menu_stores_customer -> {
-                    replaceFragment(FragmentMyStoresCustomer())
+                    replaceFragment(FragmentStoresCustomer())
                 }
 
                 R.id.menu_films_customer -> {

@@ -173,7 +173,7 @@ class LoginActivity : AppCompatActivity() {
                                 Toast.makeText(
                                     this,
                                     "login as manager successfully",
-                                    Toast.LENGTH_LONG
+                                    Toast.LENGTH_SHORT
                                 ).show()
                             } else {
                                 Toast.makeText(this, "Password is wrong", Toast.LENGTH_LONG).show()
@@ -189,7 +189,7 @@ class LoginActivity : AppCompatActivity() {
                                 Toast.makeText(
                                     this,
                                     "login as customer successfully",
-                                    Toast.LENGTH_LONG
+                                    Toast.LENGTH_SHORT
                                 ).show()
                             } else {
                                 Toast.makeText(this, "Password is wrong", Toast.LENGTH_LONG).show()

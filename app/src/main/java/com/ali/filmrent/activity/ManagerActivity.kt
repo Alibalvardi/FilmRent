@@ -7,8 +7,12 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.ali.filmrent.R
+import com.ali.filmrent.adapter.StoreAdapter
+import com.ali.filmrent.adapter.StoreEvents
 import com.ali.filmrent.dataClass.Manager
 import com.ali.filmrent.dataClass.Store
 import com.ali.filmrent.databinding.ActivityManagerBinding
@@ -16,19 +20,13 @@ import com.ali.filmrent.databinding.AddStoreDialogBinding
 import com.ali.filmrent.roomDatabase.AppDatabase
 import com.ali.filmrent.roomDatabase.ManagerDao
 import com.ali.filmrent.roomDatabase.StoreDao
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.google.android.material.card.MaterialCardView
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 const val KEY_STORE_ID = "key_store_id"
 
-class ManagerActivity : AppCompatActivity() {
+class ManagerActivity : AppCompatActivity() , StoreEvents {
     private lateinit var binding: ActivityManagerBinding
     private lateinit var managerDao: ManagerDao
     private lateinit var storeDao: StoreDao
     private lateinit var manager: Manager
-    private lateinit var store1: Store
-    private lateinit var store2: Store
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityManagerBinding.inflate(layoutInflater)
@@ -38,11 +36,11 @@ class ManagerActivity : AppCompatActivity() {
         storeDao = AppDatabase.getDatabase(this).storeDao
         managerDao = AppDatabase.getDatabase(this).managerDao
         val managerId: Int = intent.getIntExtra(KEY_MANAGER_ID, 0)
-        manager = managerDao.returnLoginManager(managerId)
+        manager = managerDao.returnManagerById(managerId)
+
+        showStore()
 
 
-
-        showStore(managerId)
         binding.toolBarManager.title = "stores"
         setSupportActionBar(binding.toolBarManager)
 
@@ -70,8 +68,11 @@ class ManagerActivity : AppCompatActivity() {
                             rating = 0.0f,
                             url = url
                         )
+
                         storeDao.insertStore(newStore)
-                        showStore(managerId)
+
+                        showStore()
+
                         dialog.dismiss()
                     } else {
                         Toast.makeText(this, "Please enter all of text", Toast.LENGTH_LONG)
@@ -87,107 +88,21 @@ class ManagerActivity : AppCompatActivity() {
         }
 
 
-        binding.card1.setOnLongClickListener {
-            val dialog = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-            dialog.titleText = "delete store"
-            dialog.confirmText = "Delete"
-            dialog.cancelText = "cancel"
-            dialog.contentText = "delete "+ store1.name
-            dialog.setOnCancelListener {
-                dialog.dismiss()
-            }
-            dialog.setConfirmClickListener {
-                dialog.dismiss()
-                deleteStore(store1)
-                showStore(managerId)
-            }
-            dialog.show()
-            true
-        }
-        binding.card2.setOnLongClickListener {
-            val dialog = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-            dialog.titleText = "delete store"
-            dialog.confirmText = "Delete"
-            dialog.cancelText = "cancel"
-            dialog.contentText = "delete " + store1.name
-            dialog.setOnCancelListener {
-                dialog.dismiss()
-            }
-            dialog.setConfirmClickListener {
-                dialog.dismiss()
-                deleteStore(store2)
-                showStore(managerId)
-            }
-            dialog.show()
-            true
-        }
-
-
-
-
-        binding.card1.setOnClickListener {
-            val intent = Intent(this , StoreActivity::class.java)
-            intent.putExtra(KEY_STORE_ID,store1.store_id)
-            startActivity(intent)
-        }
-
-        binding.card2.setOnClickListener {
-            val intent = Intent(this , StoreActivity::class.java)
-            intent.putExtra(KEY_STORE_ID,store2.store_id)
-            startActivity(intent)
-        }
-
-
     }
 
-    private fun deleteStore(store: Store) {
-        storeDao.deleteStore(store)
+    private fun showStore() {
+        val storeList : List<Store> = storeDao.listOfAllStore()
+        val adapter = StoreAdapter(  ArrayList(storeList), this , AppDatabase.getDatabase(this))
+        binding.recycleStoresManager.layoutManager =
+            LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+        binding.recycleStoresManager.adapter = adapter
     }
 
-    private fun showStore(managerId: Int) {
-
-        binding.card1.visibility = MaterialCardView.INVISIBLE
-        binding.card2.visibility = MaterialCardView.INVISIBLE
-        val listOfStore = storeDao.listOfManagerStore(managerId)
-
-        if (listOfStore.size == 2) {
-            store1 = listOfStore[0]
-            Glide
-                .with(this)
-                .load(listOfStore[0].url)
-                .apply(RequestOptions.bitmapTransform(RoundedCornersTransformation(32, 8)))
-                .into(binding.imgStore1)
-            binding.txtNameStore1.text = listOfStore[0].name
-            binding.txtPhone1.text = listOfStore[0].phoneNumber
-            binding.ratingBar1.rating = listOfStore[0].rating
-            binding.card1.visibility = MaterialCardView.VISIBLE
-
-            store2 = listOfStore[1]
-            Glide
-                .with(this)
-                .load(listOfStore[1].url)
-                .apply(RequestOptions.bitmapTransform(RoundedCornersTransformation(32, 8)))
-                .into(binding.imgStore1)
-            binding.txtNameStore2.text = listOfStore[1].name
-            binding.txtPhone2.text = listOfStore[1].phoneNumber
-            binding.ratingBar2.rating = listOfStore[1].rating
-            binding.card2.visibility = MaterialCardView.VISIBLE
-
-
-        } else if (listOfStore.size == 1) {
-            store1 = listOfStore[0]
-            Glide
-                .with(this)
-                .load(listOfStore[0].url)
-                .apply(RequestOptions.bitmapTransform(RoundedCornersTransformation(32, 8)))
-                .into(binding.imgStore1)
-            binding.txtNameStore1.text = listOfStore[0].name
-            binding.txtPhone1.text = listOfStore[0].phoneNumber
-            binding.ratingBar1.rating = listOfStore[0].rating
-            binding.card1.visibility = MaterialCardView.VISIBLE
-        }
+    override fun onRestart() {
+        super.onRestart()
+        finish()
+        startActivity(intent)
     }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_logout, menu)
         return true
@@ -215,6 +130,29 @@ class ManagerActivity : AppCompatActivity() {
             }
         }
         return true
+    }
+
+    override fun onClickedItem(store: Store) {
+        val intent = Intent(this , StoreActivity::class.java)
+        intent.putExtra(KEY_STORE_ID,store.store_id)
+        startActivity(intent)
+    }
+
+    override fun onLongClickedItem(store: Store) {
+        val dialog = SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+        dialog.titleText = "delete store"
+        dialog.confirmText = "Delete"
+        dialog.cancelText = "cancel"
+        dialog.contentText = "delete "+ store.name
+        dialog.setOnCancelListener {
+            dialog.dismiss()
+        }
+        dialog.setConfirmClickListener {
+            dialog.dismiss()
+            storeDao.deleteStore(store)
+            showStore()
+        }
+        dialog.show()
     }
 
 
