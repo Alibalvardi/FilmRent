@@ -12,4 +12,10 @@ interface CustomerDao {
 
     @Query("SELECT COALESCE((SELECT password FROM customer WHERE username = :username), 0) AS result")
     fun getPassword(username : String) : String
+    @Query("SELECT customer_id FROM customer WHERE username LIKE :user")
+    fun getId(user: String): Int
+    @Query("SELECT * FROM customer WHERE customer_id LIKE :customerId")
+    fun getLogInCustomer(customerId: Int): Customer
+
+
 }

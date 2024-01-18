@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_myFilm_customer"
+        android:icon="@drawable/ic_my_film"
+        android:title="My film" />
+
+    <item
+        android:id="@+id/menu_stores_customer"
+        android:icon="@drawable/ic_stores"
+        android:title="Stores" />
+
+    <item
+        android:id="@+id/menu_films_customer"
+        android:icon="@drawable/ic_films"
+        android:title="Films" />
+
+    <item
+        android:id="@+id/menu_profile_customer"
+        android:icon="@drawable/ic_profile"
+        android:title="Profile" />
+
+
+
+
+</menu>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_active_rents"
+        android:title="َActive rents"
+       />
+
+    <item
+        android:id="@+id/menu_reservation_request"
+        android:title="R1"
+        />
+
+    <item
+        android:id="@+id/menu_store_rating"
+        android:title="S2"
+        />
+
+    <item
+        android:id="@+id/menu_top_selling"
+        android:title="3"
+        />
+
+    <item android:title="Payment 3">
+
+        <menu>
+
+
+            <item
+                android:id="@+id/menu_payment_store"
+
+                android:title="e4s"
+                /><item
+                android:id="@+id/menu_payment_customer"
+
+                android:title="e5ts"
+                />
+            <item
+                android:id="@+id/menu_payment_film"
+
+                android:title="6s" />
+        </menu>
+
+    </item>
+
+
+
+
+
+
+
+
+</menu>

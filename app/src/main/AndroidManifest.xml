@@ -17,6 +17,9 @@
         tools:replace="android:icon"
         tools:targetApi="31">
         <activity
+            android:name=".activity.CustomerActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.StoreFilmInformationActivity"
             android:exported="false" />
         <activity

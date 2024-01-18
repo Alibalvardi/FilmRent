@@ -14,7 +14,9 @@ import com.ali.filmrent.databinding.SignupDialogBinding
 import com.ali.filmrent.roomDatabase.AppDatabase
 import com.ali.filmrent.roomDatabase.CustomerDao
 import com.ali.filmrent.roomDatabase.ManagerDao
-const val KEY_MANAGER_ID ="manager_id"
+
+const val KEY_MANAGER_ID = "manager_id"
+const val KEY_CUSTOMER_ID = "customer_id"
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -156,10 +158,6 @@ class LoginActivity : AppCompatActivity() {
                     val user = dialogBinding.edtUsername.text.toString()
                     val pass = dialogBinding.edtPassword.text.toString()
 
-
-
-
-
                     if (customerDao.getPassword(user) != "0" || managerDao.getPassword(user) != "0") {
 
                         val isManager: Boolean = managerDao.getPassword(user) != "0"
@@ -183,6 +181,11 @@ class LoginActivity : AppCompatActivity() {
                         } else {
                             if (customerDao.getPassword(user) == pass) {
                                 dialog.dismiss()
+                                val intent = Intent(this, CustomerActivity::class.java)
+                                intent.putExtra(KEY_CUSTOMER_ID, customerDao.getId(user))
+                                intent.flags =
+                                    Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                startActivity(intent)
                                 Toast.makeText(
                                     this,
                                     "login as customer successfully",
