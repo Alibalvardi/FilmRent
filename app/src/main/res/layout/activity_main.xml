@@ -8,22 +8,24 @@
     tools:context=".activity.MainActivity">
 
     <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/empty_rectangle"
         android:padding="8dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="video rentals"
-        android:textSize="40sp"
         android:textColor="?attr/colorPrimary"
-        android:background="@drawable/empty_rectangle"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <LinearLayout
-        android:id="@+id/btn_go_to_manager"
+        android:id="@+id/btn_go_to_login"
         android:layout_width="210dp"
         android:layout_height="60dp"
         android:background="@drawable/rectangle"
@@ -35,41 +37,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/textView">
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="top  as  Manager"
-            android:textColor="?attr/colorOnPrimary"
-            android:textSize="18sp" />
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/btn_go_to_customer"
-        android:layout_width="210dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/rectangle"
-        android:clickable="true"
-        android:elevation="4dp"
-        android:focusable="true"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_go_to_manager">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="top  as  Customer"
+            android:text="Top  to  start"
             android:textColor="?attr/colorOnPrimary"
             android:textSize="18sp" />
 

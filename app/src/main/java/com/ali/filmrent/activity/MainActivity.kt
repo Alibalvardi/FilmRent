@@ -44,14 +44,8 @@ class MainActivity : AppCompatActivity() {
             sharedPreferences.edit().putBoolean("first_run", false).apply()
         }
 
-
-        binding.btnGoToManager.setOnClickListener {
-            val intent = Intent(this, ManagerLoginActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.btnGoToCustomer.setOnClickListener {
-            val intent = Intent(this, CustomerLoginActivity::class.java)
+        binding.btnGoToLogin.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
     }
