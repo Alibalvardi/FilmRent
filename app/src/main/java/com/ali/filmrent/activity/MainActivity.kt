@@ -1,10 +1,14 @@
 package com.ali.filmrent.activity
 
+import android.annotation.SuppressLint
+import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.ali.filmrent.dataClass.Actor
+import com.ali.filmrent.dataClass.AppCalendar
 import com.ali.filmrent.dataClass.Category
 import com.ali.filmrent.dataClass.Film
 import com.ali.filmrent.dataClass.ImgStore
@@ -12,10 +16,13 @@ import com.ali.filmrent.dataClass.Language
 import com.ali.filmrent.databinding.ActivityMainBinding
 import com.ali.filmrent.roomDatabase.ActorDao
 import com.ali.filmrent.roomDatabase.AppDatabase
+import com.ali.filmrent.roomDatabase.CalendarDao
 import com.ali.filmrent.roomDatabase.CategoryDao
 import com.ali.filmrent.roomDatabase.FilmDao
 import com.ali.filmrent.roomDatabase.ImgStoreDao
 import com.ali.filmrent.roomDatabase.LanguageDao
+import java.text.SimpleDateFormat
+import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -24,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var languageDao: LanguageDao
     private lateinit var categoryDao: CategoryDao
     private lateinit var imgStoreDao: ImgStoreDao
+    private lateinit var calendarDao: CalendarDao
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -35,6 +43,9 @@ class MainActivity : AppCompatActivity() {
         languageDao = AppDatabase.getDatabase(this).languageDao
         categoryDao = AppDatabase.getDatabase(this).categoryDao
         imgStoreDao = AppDatabase.getDatabase(this).imgStoreDao
+        calendarDao = AppDatabase.getDatabase(this).calendarDao
+        var myCalendar = Calendar.getInstance()
+        var newCalendar = Calendar.getInstance()
 
 
         //for insert all film to database in first run
@@ -42,12 +53,51 @@ class MainActivity : AppCompatActivity() {
         if (sharedPreferences.getBoolean("first_run", true)) {
             firstRun()
             sharedPreferences.edit().putBoolean("first_run", false).apply()
+        } else {
+            myCalendar = calendarDao.getCalendar(1).calendar
+        }
+
+        updateTxtDate(myCalendar)
+
+
+        binding.btnSelectDate.setOnClickListener {
+            val datePicker = DatePickerDialog.OnDateSetListener { _, year, month, day ->
+                newCalendar.set(Calendar.YEAR, year)
+                newCalendar.set(Calendar.MONTH, month)
+                newCalendar.set(Calendar.DAY_OF_MONTH, day)
+
+                if (newCalendar.after(myCalendar)) {
+                    updateTxtDate(newCalendar)
+                } else {
+                    Toast.makeText(
+                        this,
+                        "The chosen date must be after the program date",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+            }
+            DatePickerDialog(
+                this,
+                datePicker,
+                myCalendar.get(Calendar.YEAR),
+                myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH)
+            ).show()
+
         }
 
         binding.btnGoToLogin.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
+            myCalendar = newCalendar
+            calendarDao.updateCalendar(AppCalendar(1, myCalendar))
             startActivity(intent)
         }
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    private fun updateTxtDate(myCalendar: Calendar) {
+        binding.txtDate.text = SimpleDateFormat("dd/MM/yyyy").format(myCalendar.time)
     }
 
     private fun firstRun() {
@@ -224,6 +274,10 @@ class MainActivity : AppCompatActivity() {
         )
         filmDao.insertListOfFilm(filmList)
         imgStoreDao.insertListOfUrl(urlStoreList)
+
+        val myCalendar = Calendar.getInstance()
+        calendarDao.insert(AppCalendar(calendar = myCalendar))
+
         for (item in filmList) {
             actorDao.insertActor(item.actor)
             languageDao.insertLanguage(item.language)
@@ -232,3 +286,4 @@ class MainActivity : AppCompatActivity() {
 
     }
 }
+
