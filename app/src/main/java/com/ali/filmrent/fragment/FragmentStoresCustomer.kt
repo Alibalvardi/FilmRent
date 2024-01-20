@@ -1,5 +1,6 @@
 package com.ali.filmrent.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.ali.filmrent.activity.BuyFilmActivity
+import com.ali.filmrent.activity.KEY_STORE_ID
+import com.ali.filmrent.activity.StoreInformationForCustomerActivity
 import com.ali.filmrent.adapter.FilmAdapter
 import com.ali.filmrent.adapter.StoreAdapter
 import com.ali.filmrent.adapter.StoreEvents
@@ -46,7 +50,9 @@ class FragmentStoresCustomer : Fragment(), StoreEvents {
     }
 
     override fun onClickedItem(store: Store) {
-        TODO("Not yet implemented")
+        val intent = Intent(activity, StoreInformationForCustomerActivity::class.java)
+        intent.putExtra(KEY_STORE_ID,store.store_id)
+        startActivity(intent)
     }
 
     override fun onLongClickedItem(store: Store) {

@@ -26,9 +26,7 @@ class StoreAdapter(
     inner class FilmViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         @SuppressLint("SetTextI18n")
         fun bindViews(store: Store) {
-            val manager = appDatabase.managerDao.returnManagerById(
-                appDatabase.storeDao.getStoreManagerId(store.store_id!!)
-            )
+            val manager = appDatabase.managerDao.returnManagerById(store.manager_id)
             Glide
                 .with(itemView.context)
                 .load(store.url)
@@ -40,7 +38,7 @@ class StoreAdapter(
             binding.txtManagerName.text = "Manager : " + manager.firstname + " " + manager.lastname
             binding.txtManagerPhone.text = "Manager phone : " + manager.phoneNumber
             binding.txtNumberOfFilms.text =
-                "the number of films : " + appDatabase.boughtInventoryDao.getStoreFilms(store.store_id).size.toString()
+                "the number of films : " + appDatabase.boughtInventoryDao.getStoreFilms(store.store_id!!).size.toString()
             binding.txtAvailableCopies.text = "the number of available copies : " //+ todo
             binding.ratingBar1.rating = store.rating
             binding.txtStoreNumber.text = (adapterPosition + 1).toString()
