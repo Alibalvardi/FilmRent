@@ -167,8 +167,6 @@ class LoginActivity : AppCompatActivity() {
 
                                 val intent = Intent(this, ManagerActivity::class.java)
                                 intent.putExtra(KEY_MANAGER_ID, managerDao.getId(user))
-                                intent.flags =
-                                    Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                                 startActivity(intent)
                                 Toast.makeText(
                                     this,
@@ -183,8 +181,8 @@ class LoginActivity : AppCompatActivity() {
                                 dialog.dismiss()
                                 val intent = Intent(this, CustomerActivity::class.java)
                                 intent.putExtra(KEY_CUSTOMER_ID, customerDao.getId(user))
-                                intent.flags =
-                                    Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+//                                intent.flags =
+//                                    Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                                 startActivity(intent)
                                 Toast.makeText(
                                     this,

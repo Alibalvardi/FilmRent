@@ -2,6 +2,7 @@ package com.ali.filmrent.dataClass
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.util.Calendar
 
 @Entity(tableName = "Payment")
 data class Payment(
@@ -11,5 +12,5 @@ data class Payment(
     val store_id : Int ,
     val rental_id : Int ,
     val amount : Double ,
-    //val payment_date
+    val settlementDate : Calendar
 )

@@ -40,8 +40,8 @@ class StoreAdapter(
             binding.txtManagerName.text = "Manager : " + manager.firstname + " " + manager.lastname
             binding.txtManagerPhone.text = "Manager phone : " + manager.phoneNumber
             binding.txtNumberOfFilms.text =
-                "the number of  films : " + appDatabase.boughtInventoryDao.getStoreFilms(store.store_id).size.toString()
-            binding.txtAvailableCopies.text = "the number of  films : " //+ todo
+                "the number of films : " + appDatabase.boughtInventoryDao.getStoreFilms(store.store_id).size.toString()
+            binding.txtAvailableCopies.text = "the number of available copies : " //+ todo
             binding.ratingBar1.rating = store.rating
             binding.txtStoreNumber.text = (adapterPosition + 1).toString()
 

@@ -92,7 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="the number of  films : 24"
+            android:text="the number of available copies : 24"
             android:textColor="?attr/colorOnSecondary"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@+id/txt_numberOfFilms"
