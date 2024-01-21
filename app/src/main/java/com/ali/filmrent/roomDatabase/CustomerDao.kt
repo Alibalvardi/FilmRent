@@ -15,7 +15,7 @@ interface CustomerDao {
     @Query("SELECT customer_id FROM customer WHERE username LIKE :user")
     fun getId(user: String): Int
     @Query("SELECT * FROM customer WHERE customer_id LIKE :customerId")
-    fun getLogInCustomer(customerId: Int): Customer
+    fun getCustomerById(customerId: Int): Customer
 
 
 }

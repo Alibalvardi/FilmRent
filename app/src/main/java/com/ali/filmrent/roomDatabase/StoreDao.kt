@@ -30,6 +30,8 @@ interface StoreDao {
     fun getStoreManagerId(storeId: Int): Int
     @Update
     fun updateStore(newStore: Store)
+    @Query("UPDATE store SET rating = :storeRate WHERE store_id = :storeId ")
+    fun updateStoreRate(storeId: Int, storeRate: Float)
 
 
 

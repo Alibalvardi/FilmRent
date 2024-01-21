@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ali.filmrent.activity.BuyFilmActivity
+import com.ali.filmrent.activity.KEY_CUSTOMER_ID
 import com.ali.filmrent.activity.KEY_STORE_ID
 import com.ali.filmrent.activity.StoreInformationForCustomerActivity
 import com.ali.filmrent.adapter.FilmAdapter
@@ -49,9 +50,13 @@ class FragmentStoresCustomer : Fragment(), StoreEvents {
         binding.recycleStoresCustomer.adapter = adapter
     }
 
+
+
     override fun onClickedItem(store: Store) {
         val intent = Intent(activity, StoreInformationForCustomerActivity::class.java)
         intent.putExtra(KEY_STORE_ID,store.store_id)
+        val managerId : Int = activity?.intent!!.getIntExtra(KEY_CUSTOMER_ID,0)
+        intent.putExtra(KEY_CUSTOMER_ID , managerId)
         startActivity(intent)
     }
 

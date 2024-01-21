@@ -31,10 +31,11 @@ class CustomerActivity : AppCompatActivity() {
         //get data From database
         customerDao = AppDatabase.getDatabase(this).customerDao
         val customer_id: Int = intent.getIntExtra(KEY_CUSTOMER_ID, 0)
-        customer = customerDao.getLogInCustomer(customer_id)
+        customer = customerDao.getCustomerById(customer_id)
 
         binding.toolBarCustomer.title = customer.firstname + "  " + customer.lastname
-        binding.bottomNavigationCustomer.labelVisibilityMode = NavigationBarView.LABEL_VISIBILITY_LABELED
+        binding.bottomNavigationCustomer.labelVisibilityMode =
+            NavigationBarView.LABEL_VISIBILITY_LABELED
 
 
         setSupportActionBar(binding.toolBarCustomer)
@@ -62,7 +63,8 @@ class CustomerActivity : AppCompatActivity() {
                 R.id.menu_films_customer -> {
                     replaceFragment(FragmentFilmsCustomer())
                 }
-                R.id.menu_profile_customer->{
+
+                R.id.menu_profile_customer -> {
                     replaceFragment(FragmentMyProfileCustomer())
                 }
             }
@@ -111,5 +113,11 @@ class CustomerActivity : AppCompatActivity() {
             }
         }
         return true
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        finish()
+        startActivity(intent)
     }
 }

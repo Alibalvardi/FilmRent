@@ -12,7 +12,7 @@ data class Store(
     val store_id :Int? =null ,
     val manager_id : Int ,
     val name : String ,
-    val rating: Float ,
+    var rating: Float ,
     val phoneNumber : String ,
     val url : String
 
