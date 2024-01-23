@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         imgStoreDao = AppDatabase.getDatabase(this).imgStoreDao
         calendarDao = AppDatabase.getDatabase(this).calendarDao
         var myCalendar = Calendar.getInstance()
-        var newCalendar = Calendar.getInstance()
+        val newCalendar = Calendar.getInstance()
 
 
         //for insert all film to database in first run
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
             firstRun()
             sharedPreferences.edit().putBoolean("first_run", false).apply()
         } else {
-            myCalendar = calendarDao.getCalendar(1).calendar
+            myCalendar.timeInMillis = calendarDao.getCalendar(1)
         }
 
         updateTxtDate(myCalendar)
@@ -90,9 +90,15 @@ class MainActivity : AppCompatActivity() {
         binding.btnGoToLogin.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             myCalendar = newCalendar
-            calendarDao.updateCalendar(AppCalendar(1, myCalendar))
+            calendarDao.updateCalendar(AppCalendar(1, myCalendar.timeInMillis))
             startActivity(intent)
         }
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        finish()
+        startActivity(intent)
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -276,7 +282,7 @@ class MainActivity : AppCompatActivity() {
         imgStoreDao.insertListOfUrl(urlStoreList)
 
         val myCalendar = Calendar.getInstance()
-        calendarDao.insert(AppCalendar(calendar = myCalendar))
+        calendarDao.insert(AppCalendar(calendar = myCalendar.timeInMillis))
 
         for (item in filmList) {
             actorDao.insertActor(item.actor)

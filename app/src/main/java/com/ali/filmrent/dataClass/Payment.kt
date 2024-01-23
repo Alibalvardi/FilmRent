@@ -12,5 +12,5 @@ data class Payment(
     val store_id : Int ,
     val rental_id : Int ,
     val amount : Double ,
-    val settlementDate : Calendar
+    val settlementDate : Long
 )

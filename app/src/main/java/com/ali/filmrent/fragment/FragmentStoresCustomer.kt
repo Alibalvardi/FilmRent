@@ -55,8 +55,8 @@ class FragmentStoresCustomer : Fragment(), StoreEvents {
     override fun onClickedItem(store: Store) {
         val intent = Intent(activity, StoreInformationForCustomerActivity::class.java)
         intent.putExtra(KEY_STORE_ID,store.store_id)
-        val managerId : Int = activity?.intent!!.getIntExtra(KEY_CUSTOMER_ID,0)
-        intent.putExtra(KEY_CUSTOMER_ID , managerId)
+        val customerId : Int = activity?.intent!!.getIntExtra(KEY_CUSTOMER_ID,0)
+        intent.putExtra(KEY_CUSTOMER_ID , customerId)
         startActivity(intent)
     }
 

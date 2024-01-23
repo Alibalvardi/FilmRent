@@ -1,6 +1,7 @@
 package com.ali.filmrent.activity
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -18,6 +19,7 @@ import com.ali.filmrent.dataClass.Store
 import com.ali.filmrent.databinding.ActivityStoreInformationForCustomerBinding
 import com.ali.filmrent.databinding.LoginDialogBinding
 import com.ali.filmrent.databinding.RatingToStoreDialogBinding
+import com.ali.filmrent.fragment.KEY_FILM_ID
 import com.ali.filmrent.roomDatabase.AppDatabase
 import com.ali.filmrent.roomDatabase.BoughtInventoryDao
 import com.ali.filmrent.roomDatabase.CustomerDao
@@ -142,7 +144,7 @@ class StoreInformationForCustomerActivity : AppCompatActivity(), FilmEvents {
         val storeFilms = filmDao.getFilmsById(storeFilmsId)
         val adapter = FilmAdapter(
             films = ArrayList(storeFilms),
-            1,
+            store.store_id!!,
             this,
             AppDatabase.getDatabase(this)
         )
@@ -160,6 +162,10 @@ class StoreInformationForCustomerActivity : AppCompatActivity(), FilmEvents {
     }
 
     override fun onClickedItem(film: Film) {
-
+        val intent = Intent(this, RentActivity::class.java)
+        intent.putExtra(KEY_STORE_ID, store.store_id)
+        intent.putExtra(KEY_CUSTOMER_ID, customer.customer_id)
+        intent.putExtra(KEY_FILM_ID, film.film_id)
+        startActivity(intent)
     }
 }

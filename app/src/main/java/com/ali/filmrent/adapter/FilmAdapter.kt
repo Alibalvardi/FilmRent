@@ -48,7 +48,14 @@ class FilmAdapter(
                 binding.txtInformation.text = "Price : $10"
             } else {
                 binding.txtInformation.text =
-                    "Numbers : " + database.boughtInventoryDao.countOfFilm(store_id, film.film_id!!)
+                    "Number of available film copies : " + (database.boughtInventoryDao.countOfFilm(
+                        store_id,
+                        film.film_id!!
+                    ) - database.rentalDao.countOfActiveRentsOfFilm(
+                        store_id,
+                        film.film_id
+                    )).toString()
+
             }
 
             itemView.setOnClickListener {

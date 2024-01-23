@@ -9,7 +9,7 @@ import com.ali.filmrent.dataClass.*
     exportSchema = false,
     entities = [Customer::class, Film::class, Manager::class, Store::class, Actor::class, BoughtInventory::class, Category::class, Language::class, Payment::class, Rental::class,  ImgStore::class , AppCalendar::class , Rating::class]
 )
-@TypeConverters(FilmTypeConverters1::class, FilmTypeConverters2::class, FilmTypeConverters3::class,TypeConvertersCalender::class)
+@TypeConverters(FilmTypeConverters1::class, FilmTypeConverters2::class, FilmTypeConverters3::class)
 
 abstract class AppDatabase : RoomDatabase() {
     abstract val customerDao: CustomerDao
