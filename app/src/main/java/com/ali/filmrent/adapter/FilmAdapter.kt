@@ -2,10 +2,13 @@ package com.ali.filmrent.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.ali.filmrent.R
 import com.ali.filmrent.dataClass.Film
 import com.ali.filmrent.databinding.ItemFilmBinding
 import com.ali.filmrent.roomDatabase.AppDatabase
@@ -46,7 +49,7 @@ class FilmAdapter(
 
             if (store_id == 0) {
                 binding.txtInformation.text = "Price : $10"
-            } else {
+            } else if (store_id > 0){
                 binding.txtInformation.text =
                     "Number of available film copies : " + (database.boughtInventoryDao.countOfFilm(
                         store_id,
@@ -56,6 +59,9 @@ class FilmAdapter(
                         film.film_id
                     )).toString()
 
+            }else{
+                binding.txtInformation.text = "Active"
+                binding.txtInformation.setTextColor(Color.parseColor("#12B31A"))
             }
 
             itemView.setOnClickListener {

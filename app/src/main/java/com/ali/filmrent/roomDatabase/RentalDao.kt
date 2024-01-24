@@ -19,6 +19,9 @@ interface RentalDao {
     @Query("SELECT COUNT(*) FROM rental WHERE customer_id = :customerId AND store_id=:storeId AND returnDate =0")
     fun countOfActiveRentsOfCustomerFromStore(storeId: Int, customerId: Int): Int
 
+    @Query("SELECT film_id FROM rental WHERE customer_id LIKE :customerId")
+    fun getCustomerFilms(customerId: Int): List<Int>
+
 
 
 
