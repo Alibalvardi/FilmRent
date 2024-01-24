@@ -11,6 +11,6 @@ data class Payment(
     val customer_id : Int ,
     val store_id : Int ,
     val rental_id : Int ,
-    val amount : Double ,
+    val amount : Int ,
     val settlementDate : Long
 )

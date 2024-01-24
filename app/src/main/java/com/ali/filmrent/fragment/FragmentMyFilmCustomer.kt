@@ -1,5 +1,6 @@
 package com.ali.filmrent.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,8 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.ali.filmrent.activity.CustomerActiveRentActivity
 import com.ali.filmrent.activity.KEY_CUSTOMER_ID
 import com.ali.filmrent.activity.KEY_STORE_ID
+import com.ali.filmrent.activity.RentActivity
+import com.ali.filmrent.activity.StoreInformationForCustomerActivity
 import com.ali.filmrent.adapter.FilmAdapter
 import com.ali.filmrent.adapter.FilmEvents
 import com.ali.filmrent.dataClass.Customer
@@ -46,8 +50,8 @@ class FragmentMyFilmCustomer : Fragment() , FilmEvents {
         val customerId: Int = activity?.intent!!.getIntExtra(KEY_CUSTOMER_ID, 0)
         customer = customerDao.getCustomerById(customerId)
 
-        val customerFilmsId: List<Int> = rentalDao.getCustomerFilms(customer.customer_id!!)
-        val customerFilms = filmDao.getFilmsById(customerFilmsId)
+        val customeractiveFilmsId: List<Int> = rentalDao.getCustomerActiveFilms(customer.customer_id!!)
+        val customerFilms = filmDao.getFilmsById(customeractiveFilmsId)
 
 
         val adapter = FilmAdapter(
@@ -63,7 +67,11 @@ class FragmentMyFilmCustomer : Fragment() , FilmEvents {
     }
 
     override fun onClickedItem(film: Film) {
-
+        val intent = Intent(activity, CustomerActiveRentActivity::class.java)
+        intent.putExtra(KEY_FILM_ID,film.film_id)
+        val customerId : Int = activity?.intent!!.getIntExtra(KEY_CUSTOMER_ID,0)
+        intent.putExtra(KEY_CUSTOMER_ID , customerId)
+        startActivity(intent)
     }
 
 }

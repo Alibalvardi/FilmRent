@@ -55,6 +55,7 @@ class MainActivity : AppCompatActivity() {
             sharedPreferences.edit().putBoolean("first_run", false).apply()
         } else {
             myCalendar.timeInMillis = calendarDao.getCalendar(1)
+            newCalendar.timeInMillis = calendarDao.getCalendar(1)
         }
 
         updateTxtDate(myCalendar)

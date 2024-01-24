@@ -17,6 +17,9 @@
         tools:replace="android:icon"
         tools:targetApi="31">
         <activity
+            android:name=".activity.CustomerActiveRentActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.RentActivity"
             android:exported="false" />
         <activity

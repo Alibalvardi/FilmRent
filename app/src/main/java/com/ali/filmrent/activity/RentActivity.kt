@@ -113,9 +113,10 @@ class RentActivity : AppCompatActivity() {
                         rentDuration = 14
                     )
                 )
-
+                Toast.makeText(this," Rented successfully", Toast.LENGTH_LONG).show()
                 showData()
                 dialog.dismiss()
+                onBackPressed()
             } else {
                 dialog.dismiss()
                 Toast.makeText(this, "You have 3 active rents from this store", Toast.LENGTH_LONG).show()

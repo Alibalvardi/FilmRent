@@ -16,6 +16,10 @@ interface CustomerDao {
     fun getId(user: String): Int
     @Query("SELECT * FROM customer WHERE customer_id LIKE :customerId")
     fun getCustomerById(customerId: Int): Customer
+    @Query("UPDATE customer SET wallet = :i WHERE customer_id=:customerId")
+    fun updateWallet(customerId: Int, i: Int)
+
+
 
 
 }
