@@ -92,7 +92,7 @@ class ManagerActivity : AppCompatActivity() , StoreEvents {
 
     private fun showStore() {
         val storeList : List<Store> = storeDao.listOfManagerStore(manager.manager_id!!)
-        val adapter = StoreAdapter(  ArrayList(storeList), this , AppDatabase.getDatabase(this))
+        val adapter = StoreAdapter(  ArrayList(storeList), 0,this , AppDatabase.getDatabase(this))
         binding.recycleStoresManager.layoutManager =
             LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         binding.recycleStoresManager.adapter = adapter

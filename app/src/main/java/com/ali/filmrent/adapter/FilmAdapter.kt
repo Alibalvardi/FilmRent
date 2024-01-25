@@ -49,7 +49,7 @@ class FilmAdapter(
 
             if (store_id == 0) {
                 binding.txtInformation.text = "Price : $10"
-            } else if (store_id > 0){
+            } else if (store_id > 0) {
                 binding.txtInformation.text =
                     "Number of available film copies : " + (database.boughtInventoryDao.countOfFilm(
                         store_id,
@@ -59,9 +59,17 @@ class FilmAdapter(
                         film.film_id
                     )).toString()
 
-            }else{
+            } else if (store_id == -1) {
                 binding.txtInformation.text = "Active"
                 binding.txtInformation.setTextColor(Color.parseColor("#12B31A"))
+            } else {
+                binding.txtInformation.text =
+                    "Number of available film copies : " + (database.boughtInventoryDao.countOfFilmInAllStore(
+                        film.film_id!!
+                    ) - database.rentalDao.countOfActiveRentsOfFilmInAllStore(
+                        film.film_id
+                    )).toString()
+
             }
 
             itemView.setOnClickListener {

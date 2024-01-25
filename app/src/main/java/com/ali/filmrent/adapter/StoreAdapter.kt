@@ -16,6 +16,7 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
 class StoreAdapter(
     private val stores: ArrayList<Store>,
+    val filmId :Int ,
     val itemEvents: StoreEvents,
     val appDatabase: AppDatabase
 ) :
@@ -39,13 +40,22 @@ class StoreAdapter(
             binding.txtManagerPhone.text = "Manager phone : " + manager.phoneNumber
             binding.txtNumberOfFilms.text =
                 "the number of films : " + appDatabase.boughtInventoryDao.getStoreFilms(store.store_id!!).size.toString()
-            binding.txtAvailableCopies.text =
-                "The number of available film copies : " + (appDatabase.boughtInventoryDao.getStoreAllCopies(
-                    store.store_id,
-                ).size - appDatabase.rentalDao.countOfActiveRentsOfStore(store.store_id)).toString()
 
+            if (filmId==0) {
+                binding.txtAvailableCopies.text =
+                    "The number of available film copies : " + (appDatabase.boughtInventoryDao.getStoreAllCopies(
+                        store.store_id,
+                    ).size - appDatabase.rentalDao.countOfActiveRentsOfStore(store.store_id)).toString()
+            }else{
+                binding.txtAvailableCopies.text =
+                    "The number of available film copies : " + (appDatabase.boughtInventoryDao.getStoreFilmCopies(
+                        store.store_id,
+                        filmId
+                    ).size - appDatabase.rentalDao.countOfActiveRentsOfFilmInStore(store.store_id , filmId)).toString()
+            }
             binding.ratingBar1.rating = store.rating
             binding.txtStoreNumber.text = (adapterPosition + 1).toString()
+
 
 
             itemView.setOnClickListener {

@@ -44,7 +44,7 @@ class FragmentStoresCustomer : Fragment(), StoreEvents {
 
         val storeList: List<Store> = storeDao.listOfAllStore()
         val adapter =
-            StoreAdapter(ArrayList(storeList), this, AppDatabase.getDatabase(this.requireContext()))
+            StoreAdapter(ArrayList(storeList), 0,this, AppDatabase.getDatabase(this.requireContext()))
         binding.recycleStoresCustomer.layoutManager =
             LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         binding.recycleStoresCustomer.adapter = adapter

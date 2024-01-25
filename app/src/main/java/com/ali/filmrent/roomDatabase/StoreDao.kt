@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
+import com.ali.filmrent.dataClass.Film
 import com.ali.filmrent.dataClass.Store
 
 @Dao
@@ -32,8 +33,7 @@ interface StoreDao {
     fun updateStore(newStore: Store)
     @Query("UPDATE store SET rating = :storeRate WHERE store_id = :storeId ")
     fun updateStoreRate(storeId: Int, storeRate: Float)
-
-
-
+    @Query("SELECT * FROM store WHERE store_id IN (:storesOfFilmId)")
+    fun getListOfStore(storesOfFilmId: List<Int>): List<Store>
 
 }
