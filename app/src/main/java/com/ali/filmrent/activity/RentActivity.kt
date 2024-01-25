@@ -204,7 +204,7 @@ class RentActivity : AppCompatActivity() {
         binding.itemRatingbarFilm.rating = film.rating
 
         val manager =
-            (AppDatabase.getDatabase(this).managerDao).returnManagerById(store.manager_id)
+            (AppDatabase.getDatabase(this).managerDao).getManagerById(store.manager_id)
         binding.txtStoreName.text = "Store name : " + store.name
         binding.txtStorePhone.text = "Phone : " + store.phoneNumber
         binding.txtStoreManagerName.text =

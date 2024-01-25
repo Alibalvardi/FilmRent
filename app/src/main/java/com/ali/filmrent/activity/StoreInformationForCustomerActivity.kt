@@ -17,7 +17,6 @@ import com.ali.filmrent.dataClass.Film
 import com.ali.filmrent.dataClass.Rating
 import com.ali.filmrent.dataClass.Store
 import com.ali.filmrent.databinding.ActivityStoreInformationForCustomerBinding
-import com.ali.filmrent.databinding.LoginDialogBinding
 import com.ali.filmrent.databinding.RatingToStoreDialogBinding
 import com.ali.filmrent.fragment.KEY_FILM_ID
 import com.ali.filmrent.roomDatabase.AppDatabase
@@ -132,7 +131,7 @@ class StoreInformationForCustomerActivity : AppCompatActivity(), FilmEvents {
     private fun showData() {
         val store_id: Int = intent.getIntExtra(KEY_STORE_ID, 0)
         store = storeDao.getStoreById(store_id)
-        val manager = AppDatabase.getDatabase(this).managerDao.returnManagerById(store.manager_id)
+        val manager = AppDatabase.getDatabase(this).managerDao.getManagerById(store.manager_id)
         binding.collapsingStore.title = store.name + "   Store"
         Glide.with(this).load(store.url).into(binding.imgStoreProfile)
         binding.txtStoreName.text = "Store name : " + store.name

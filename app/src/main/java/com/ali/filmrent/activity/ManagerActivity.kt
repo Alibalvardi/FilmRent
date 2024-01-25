@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,9 +21,10 @@ import com.ali.filmrent.databinding.AddStoreDialogBinding
 import com.ali.filmrent.roomDatabase.AppDatabase
 import com.ali.filmrent.roomDatabase.ManagerDao
 import com.ali.filmrent.roomDatabase.StoreDao
+
 const val KEY_STORE_ID = "key_store_id"
 
-class ManagerActivity : AppCompatActivity() , StoreEvents {
+class ManagerActivity : AppCompatActivity(), StoreEvents {
     private lateinit var binding: ActivityManagerBinding
     private lateinit var managerDao: ManagerDao
     private lateinit var storeDao: StoreDao
@@ -36,14 +38,34 @@ class ManagerActivity : AppCompatActivity() , StoreEvents {
         storeDao = AppDatabase.getDatabase(this).storeDao
         managerDao = AppDatabase.getDatabase(this).managerDao
         val managerId: Int = intent.getIntExtra(KEY_MANAGER_ID, 0)
-        manager = managerDao.returnManagerById(managerId)
+        manager = managerDao.getManagerById(managerId)
 
         showStore()
 
 
         binding.toolBarManager.title = "stores"
         setSupportActionBar(binding.toolBarManager)
+        val actionBarDrawerToggle = ActionBarDrawerToggle(
+            this,
+            binding.drawerLayoutManager,
+            binding.toolBarManager,
+            R.string.open_drawer,
+            R.string.close_drawer
+        )
+        actionBarDrawerToggle.syncState()
 
+        binding.drawerLayoutManager.addDrawerListener(actionBarDrawerToggle)
+        binding.navigationDrawerManager.setNavigationItemSelectedListener {
+            when (it.itemId) {
+
+                R.id.menu_profile_manager -> {
+                    val intent = Intent(this, ProfileManagerActivity::class.java)
+                    intent.putExtra(KEY_MANAGER_ID, manager.manager_id)
+                    startActivity(intent)
+                }
+            }
+            true
+        }
 
         binding.fabButtom.setOnClickListener {
             if (storeDao.listOfManagerStore(managerId).size < 2) {
@@ -87,12 +109,11 @@ class ManagerActivity : AppCompatActivity() , StoreEvents {
             }
         }
 
-
     }
 
     private fun showStore() {
-        val storeList : List<Store> = storeDao.listOfManagerStore(manager.manager_id!!)
-        val adapter = StoreAdapter(  ArrayList(storeList), 0,this , AppDatabase.getDatabase(this))
+        val storeList: List<Store> = storeDao.listOfManagerStore(manager.manager_id!!)
+        val adapter = StoreAdapter(ArrayList(storeList), 0, this, AppDatabase.getDatabase(this))
         binding.recycleStoresManager.layoutManager =
             LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         binding.recycleStoresManager.adapter = adapter
@@ -103,6 +124,7 @@ class ManagerActivity : AppCompatActivity() , StoreEvents {
         finish()
         startActivity(intent)
     }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_logout, menu)
         return true
@@ -133,8 +155,8 @@ class ManagerActivity : AppCompatActivity() , StoreEvents {
     }
 
     override fun onClickedItem(store: Store) {
-        val intent = Intent(this , StoreActivity::class.java)
-        intent.putExtra(KEY_STORE_ID,store.store_id)
+        val intent = Intent(this, StoreActivity::class.java)
+        intent.putExtra(KEY_STORE_ID, store.store_id)
         startActivity(intent)
     }
 
@@ -143,7 +165,7 @@ class ManagerActivity : AppCompatActivity() , StoreEvents {
         dialog.titleText = "delete store"
         dialog.confirmText = "Delete"
         dialog.cancelText = "cancel"
-        dialog.contentText = "delete "+ store.name
+        dialog.contentText = "delete " + store.name
         dialog.setOnCancelListener {
             dialog.dismiss()
         }

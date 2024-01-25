@@ -17,6 +17,9 @@
         tools:replace="android:icon"
         tools:targetApi="31">
         <activity
+            android:name=".activity.ProfileManagerActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.StoresOfFilmActivity"
             android:exported="false" />
         <activity

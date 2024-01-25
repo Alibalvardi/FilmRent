@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.ali.filmrent.adapter.ActiveRentAdapter
-import com.ali.filmrent.adapter.FilmAdapter
 import com.ali.filmrent.adapter.RentEvents
 import com.ali.filmrent.dataClass.Customer
 import com.ali.filmrent.dataClass.Film
@@ -93,7 +92,7 @@ class CustomerActiveRentActivity : AppCompatActivity(), RentEvents {
             paymentAmount = (nowDuration * 2)
         }
 
-        manager = managerDao.returnManagerById(storeDao.getStoreManagerId(rent.store_id))
+        manager = managerDao.getManagerById(storeDao.getStoreManagerId(rent.store_id))
 
         val dialog = SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
         dialog.titleText = "Return"

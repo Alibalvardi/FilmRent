@@ -27,7 +27,7 @@ class StoreAdapter(
     inner class FilmViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         @SuppressLint("SetTextI18n")
         fun bindViews(store: Store) {
-            val manager = appDatabase.managerDao.returnManagerById(store.manager_id)
+            val manager = appDatabase.managerDao.getManagerById(store.manager_id)
             Glide
                 .with(itemView.context)
                 .load(store.url)

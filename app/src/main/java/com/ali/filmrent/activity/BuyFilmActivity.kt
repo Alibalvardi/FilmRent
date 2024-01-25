@@ -118,7 +118,7 @@ class BuyFilmActivity : AppCompatActivity() {
         val invoice = (numberOFFilm * film.amount)
         val manager_id = (AppDatabase.getDatabase(this).storeDao).getStoreManagerId(store_id)
         val wallet =
-            (AppDatabase.getDatabase(this).managerDao).returnManagerById(manager_id).wallet
+            (AppDatabase.getDatabase(this).managerDao).getManagerById(manager_id).wallet
 
 
 

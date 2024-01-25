@@ -66,6 +66,13 @@
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigationDrawerManager"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+
+        app:menu="@menu/menu_navigation_manager" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
 
