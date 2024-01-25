@@ -3,6 +3,7 @@ package com.ali.filmrent.activity
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.addTextChangedListener
@@ -31,6 +32,12 @@ class ProfileManagerActivity : AppCompatActivity() {
         manager = managerDao.getManagerById(intent.getIntExtra(KEY_MANAGER_ID, 0))
 
         showData()
+
+        setSupportActionBar(binding.toolBarManagerProfile)
+
+        supportActionBar!!.setHomeButtonEnabled(true)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
 
         binding.toolBarManagerProfile.title = "Manger profile"
         binding.fabEditProfile.setOnClickListener {
@@ -151,11 +158,17 @@ class ProfileManagerActivity : AppCompatActivity() {
         }
 
 
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home)
+            onBackPressed()
+        return true
     }
 
     @SuppressLint("SetTextI18n")
     private fun showData() {
+        binding.toolBarManagerProfile.title = "Manger profile"
         binding.txtName.text = "Name : " + manager.firstname + " " + manager.lastname
         binding.txtPhone.text = "Phone : " + manager.phoneNumber
         binding.txtEmail.text = "Email : " + manager.email

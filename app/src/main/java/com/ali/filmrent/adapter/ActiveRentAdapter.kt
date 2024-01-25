@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ali.filmrent.dataClass.Rental
 import com.ali.filmrent.dataClass.Store
@@ -44,6 +45,7 @@ class ActiveRentAdapter(
             } else {
                 binding.txtName.text = "Customer : " + customer.firstname + " " + customer.lastname
                 binding.txtPhone.text = "Phone : " + store.phoneNumber
+                binding.txtReturn.visibility = TextView.INVISIBLE
             }
 
             val startDate = Calendar.getInstance()

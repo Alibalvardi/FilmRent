@@ -157,7 +157,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Number of active fares : "
+                android:text="Number of active rents : "
                 android:textColor="?attr/colorOnSecondary"
                 android:textSize="18sp" />
 

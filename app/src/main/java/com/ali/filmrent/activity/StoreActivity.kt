@@ -66,6 +66,18 @@ class StoreActivity : AppCompatActivity() {
         }
         binding.bottomNavigation.setOnItemReselectedListener {}
 
+        binding.navigationDrawerStore.setNavigationItemSelectedListener {
+            when (it.itemId) {
+
+                R.id.menu_active_rents -> {
+                    val intent = Intent(this, ActiveRentsStoreActivity::class.java)
+                    intent.putExtra(KEY_STORE_ID , store.store_id)
+                    startActivity(intent)
+                }
+            }
+            true
+        }
+
     }
 
     private fun firstRun() {

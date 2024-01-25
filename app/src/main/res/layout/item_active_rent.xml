@@ -102,12 +102,12 @@
             app:layout_constraintTop_toBottomOf="@+id/txt_late_days" />
 
         <TextView
-
+            android:id="@+id/txt_return"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:text="Top to return film"
             android:layout_marginEnd="24dp"
+            android:text="Top to return film"
             android:textColor="?attr/colorPrimary"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
