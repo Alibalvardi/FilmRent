@@ -124,8 +124,8 @@ class CustomerActiveRentActivity : AppCompatActivity(), RentEvents {
                     Toast.LENGTH_LONG
                 ).show()
                 dialog.dismiss()
-                onBackPressed()
                 rateToStore(storeDao.getStoreById(rent.store_id))
+                showData()
             } else {
                 Toast.makeText(this, "You need to increase your balance", Toast.LENGTH_LONG).show()
             }

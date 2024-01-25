@@ -10,6 +10,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog
 import com.ali.filmrent.dataClass.Customer
 import com.ali.filmrent.dataClass.Film
 import com.ali.filmrent.dataClass.Rental
+import com.ali.filmrent.dataClass.Reserve
 import com.ali.filmrent.dataClass.Store
 import com.ali.filmrent.databinding.ActivityRentBinding
 import com.ali.filmrent.fragment.KEY_FILM_ID
@@ -18,6 +19,7 @@ import com.ali.filmrent.roomDatabase.BoughtInventoryDao
 import com.ali.filmrent.roomDatabase.CustomerDao
 import com.ali.filmrent.roomDatabase.FilmDao
 import com.ali.filmrent.roomDatabase.RentalDao
+import com.ali.filmrent.roomDatabase.ReserveDao
 import com.ali.filmrent.roomDatabase.StoreDao
 import com.bumptech.glide.Glide
 import java.util.Calendar
@@ -28,6 +30,7 @@ class RentActivity : AppCompatActivity() {
     private lateinit var customerDao: CustomerDao
     private lateinit var storeDao: StoreDao
     private lateinit var filmDao: FilmDao
+    private lateinit var reserveDao: ReserveDao
     private lateinit var boughtInventoryDao: BoughtInventoryDao
     private lateinit var customer: Customer
     private lateinit var store: Store
@@ -44,6 +47,7 @@ class RentActivity : AppCompatActivity() {
         customerDao = AppDatabase.getDatabase(this).customerDao
         rentalDao = AppDatabase.getDatabase(this).rentalDao
         boughtInventoryDao = AppDatabase.getDatabase(this).boughtInventoryDao
+        reserveDao = AppDatabase.getDatabase(this).reserveDao
         val filmId = intent.getIntExtra(KEY_FILM_ID, 0)
         val storeId = intent.getIntExtra(KEY_STORE_ID, 0)
         val customerId = intent.getIntExtra(KEY_CUSTOMER_ID, 0)
@@ -76,12 +80,72 @@ class RentActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(
                     this,
-                    "There is no copy available, reserve if needed",
+                    "There is no copy available, reserve if need it",
                     Toast.LENGTH_LONG
                 ).show()
             }
         }
 
+        binding.btnBook.setOnClickListener {
+            val cntAvlCopies: Int = boughtInventoryDao.countOfFilm(
+                store.store_id!!,
+                film.film_id!!
+            ) - rentalDao.countOfActiveRentsOfFilm(store.store_id!!, film.film_id!!)
+            if (cntAvlCopies > 0) {
+                Toast.makeText(
+                    this,
+                    "There is a available copy, rent if need it",
+                    Toast.LENGTH_LONG
+                ).show()
+            } else {
+                bookFilm()
+            }
+        }
+
+    }
+
+    private fun bookFilm() {
+        val dialog = SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+        dialog.titleText = "Book"
+        dialog.confirmText = "Reserve"
+        dialog.cancelText = "cancel"
+        dialog.contentText = "Book this film?"
+        dialog.setOnCancelListener {
+            dialog.dismiss()
+        }
+        dialog.setConfirmClickListener {
+            if (reserveDao.countOfReserveOfCustomerFromStoreForFilm(
+                    customer.customer_id!!,
+                    film.film_id!!,
+                    store.store_id!!,
+
+                    ) == 0
+            ) {
+                val calendar = Calendar.getInstance()
+                calendar.timeInMillis =
+                    (AppDatabase.getDatabase(this).calendarDao).getCalendar(1)
+
+                reserveDao.insertReserve(
+                    Reserve(
+                        customer_id = customer.customer_id!!,
+                        store_id = store.store_id!!,
+                        film_id = film.film_id!!,
+                        reserveDate = calendar.timeInMillis
+                    )
+                )
+
+                Toast.makeText(this, "Reserved successfully", Toast.LENGTH_LONG).show()
+                showData()
+                dialog.dismiss()
+                onBackPressed()
+            } else {
+                dialog.dismiss()
+                Toast.makeText(this, "You reserved this film from this store", Toast.LENGTH_LONG)
+                    .show()
+            }
+
+        }
+        dialog.show()
     }
 
     private fun rentFilm() {
@@ -113,13 +177,14 @@ class RentActivity : AppCompatActivity() {
                         rentDuration = 14
                     )
                 )
-                Toast.makeText(this," Rented successfully", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, " Rented successfully", Toast.LENGTH_LONG).show()
                 showData()
                 dialog.dismiss()
                 onBackPressed()
             } else {
                 dialog.dismiss()
-                Toast.makeText(this, "You have 3 active rents from this store", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "You have 3 active rents from this store", Toast.LENGTH_LONG)
+                    .show()
             }
 
         }
@@ -128,6 +193,7 @@ class RentActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun showData() {
+        binding.btnBook.text = "Reserve"
         binding.txtFilmTitle.text = film.title
         binding.txtFilmYear.text = film.yearOfRelease.toString()
         binding.txtFilmLength.text = film.length.toString() + " min"
