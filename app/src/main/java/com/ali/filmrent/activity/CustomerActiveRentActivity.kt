@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,14 +17,18 @@ import com.ali.filmrent.dataClass.Customer
 import com.ali.filmrent.dataClass.Film
 import com.ali.filmrent.dataClass.Manager
 import com.ali.filmrent.dataClass.Payment
+import com.ali.filmrent.dataClass.Rating
 import com.ali.filmrent.dataClass.Rental
+import com.ali.filmrent.dataClass.Store
 import com.ali.filmrent.databinding.ActivityCustomerActiveRentBinding
+import com.ali.filmrent.databinding.RatingToStoreDialogBinding
 import com.ali.filmrent.fragment.KEY_FILM_ID
 import com.ali.filmrent.roomDatabase.AppDatabase
 import com.ali.filmrent.roomDatabase.CustomerDao
 import com.ali.filmrent.roomDatabase.FilmDao
 import com.ali.filmrent.roomDatabase.ManagerDao
 import com.ali.filmrent.roomDatabase.PaymentDao
+import com.ali.filmrent.roomDatabase.RatingDao
 import com.ali.filmrent.roomDatabase.RentalDao
 import com.ali.filmrent.roomDatabase.StoreDao
 import com.bumptech.glide.Glide
@@ -40,6 +45,7 @@ class CustomerActiveRentActivity : AppCompatActivity(), RentEvents {
     private lateinit var storeDao: StoreDao
     private lateinit var managerDao: ManagerDao
     private lateinit var paymentDao: PaymentDao
+    private lateinit var ratingDao: RatingDao
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCustomerActiveRentBinding.inflate(layoutInflater)
@@ -47,6 +53,7 @@ class CustomerActiveRentActivity : AppCompatActivity(), RentEvents {
 
         // Get start Information
         filmDao = AppDatabase.getDatabase(this).filmDao
+        ratingDao = AppDatabase.getDatabase(this).ratingDao
         rentalDao = AppDatabase.getDatabase(this).rentalDao
         customerDao = AppDatabase.getDatabase(this).customerDao
         storeDao = AppDatabase.getDatabase(this).storeDao
@@ -116,14 +123,63 @@ class CustomerActiveRentActivity : AppCompatActivity(), RentEvents {
                     "The return of the film was done successfully",
                     Toast.LENGTH_LONG
                 ).show()
+                dialog.dismiss()
+                onBackPressed()
+                rateToStore(storeDao.getStoreById(rent.store_id))
             } else {
                 Toast.makeText(this, "You need to increase your balance", Toast.LENGTH_LONG).show()
             }
-            dialog.dismiss()
-            showData()
+
         }
         dialog.show()
 
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun rateToStore(store:Store) {
+
+        val dialog = AlertDialog.Builder(this).create()
+        val dialogBinding = RatingToStoreDialogBinding.inflate(layoutInflater)
+        dialogBinding.textView4.text = store.name + "  Store"
+        dialogBinding.ratingBar.rating = 0f
+        dialog.setView(dialogBinding.root)
+        dialog.setCancelable(true)
+        dialog.show()
+        if (ratingDao.ifCustomerRatedStore(store.store_id!!, customer.customer_id!!) == 0) {
+            dialogBinding.ratingBar.rating = 0f
+        } else {
+            dialogBinding.ratingBar.rating =
+                ratingDao.getRateIfRated(store.store_id, customer.customer_id!!)
+        }
+
+        dialogBinding.btnDone.setOnClickListener {
+
+
+            if (ratingDao.ifCustomerRatedStore(store.store_id, customer.customer_id!!) == 0) {
+                ratingDao.insertRating(
+                    Rating(
+                        rating = dialogBinding.ratingBar.rating,
+                        store_id = store.store_id,
+                        customer_id = customer.customer_id!!
+                    )
+                )
+                Toast.makeText(this, "your rate was submit", Toast.LENGTH_SHORT).show()
+            } else {
+                ratingDao.updateRating(
+                    dialogBinding.ratingBar.rating,
+                    store_id = store.store_id,
+                    customer_id = customer.customer_id!!
+                )
+                Toast.makeText(this, "your rate was updated", Toast.LENGTH_SHORT).show()
+            }
+
+            val storeRate: Float = ratingDao.avgStoreRating(store.store_id)
+            storeDao.updateStoreRate(store.store_id, storeRate)
+            dialog.dismiss()
+        }
+        dialogBinding.btnCancel.setOnClickListener {
+            dialog.dismiss()
+        }
     }
 
     @SuppressLint("SetTextI18n")

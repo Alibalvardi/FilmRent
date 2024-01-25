@@ -79,6 +79,7 @@ class StoreInformationForCustomerActivity : AppCompatActivity(), FilmEvents {
         startActivity(intent)
     }
 
+    @SuppressLint("SetTextI18n")
     private fun rateToStore() {
 
         val dialog = AlertDialog.Builder(this).create()
