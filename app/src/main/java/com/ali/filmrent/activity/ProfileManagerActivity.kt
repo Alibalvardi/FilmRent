@@ -6,9 +6,9 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.addTextChangedListener
-import com.ali.filmrent.R
 import com.ali.filmrent.dataClass.Manager
 import com.ali.filmrent.databinding.ActivityProfileManagerBinding
+import com.ali.filmrent.databinding.DepositDialogBinding
 import com.ali.filmrent.databinding.EditUserDialogBinding
 import com.ali.filmrent.roomDatabase.AppDatabase
 import com.ali.filmrent.roomDatabase.CustomerDao
@@ -32,6 +32,7 @@ class ProfileManagerActivity : AppCompatActivity() {
 
         showData()
 
+        binding.toolBarManagerProfile.title = "Manger profile"
         binding.fabEditProfile.setOnClickListener {
             val dialog = AlertDialog.Builder(this).create()
             val dialogBinding = EditUserDialogBinding.inflate(layoutInflater)
@@ -83,7 +84,7 @@ class ProfileManagerActivity : AppCompatActivity() {
                             wallet = manager.wallet,
                             email = email
                         )
-                        managerDao.updateCustomer(newManager)
+                        managerDao.updateManager(newManager)
                         manager = managerDao.getManagerById(manager.manager_id!!)
                         showData()
                         dialog.dismiss()
@@ -110,6 +111,46 @@ class ProfileManagerActivity : AppCompatActivity() {
                 dialog.dismiss()
             }
         }
+
+        binding.btnDeposit.setOnClickListener {
+            val dialog = AlertDialog.Builder(this).create()
+            val dialogBinding = DepositDialogBinding.inflate(layoutInflater)
+            dialogBinding.btnDone.text = "deposit"
+            dialogBinding.btnCancel.text = "cancel"
+            dialog.setView(dialogBinding.root)
+            dialog.setCancelable(true)
+            dialog.show()
+            dialogBinding.btnCancel.setOnClickListener {
+                dialog.dismiss()
+            }
+            dialogBinding.btnDone.setOnClickListener {
+                if (dialogBinding.edtDeposit.length() > 0) {
+                    val depositAmount: Int = dialogBinding.edtDeposit.text.toString().toInt()
+                    managerDao.updateWallet(
+                        manager.manager_id!!,
+                        manager.wallet + depositAmount
+                    )
+                    manager = managerDao.getManagerById(manager.manager_id!!)
+                    showData()
+                    dialog.dismiss()
+
+                    Toast.makeText(
+                        this,
+                        "deposit was done successfully",
+                        Toast.LENGTH_LONG
+                    ).show()
+                } else {
+                    Toast.makeText(
+                        this,
+                        "Please enter deposit amount",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                }
+            }
+        }
+
+
 
     }
 

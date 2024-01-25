@@ -24,5 +24,5 @@ interface ManagerDao {
     @Query("UPDATE manager SET wallet = :newWallet WHERE manager_id LIKE :manager_id")
     fun updateWallet(manager_id: Int, newWallet: Int)
     @Update
-    fun updateCustomer(newManager: Manager)
+    fun updateManager(newManager: Manager)
 }

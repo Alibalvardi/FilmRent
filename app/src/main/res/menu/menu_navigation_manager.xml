@@ -4,7 +4,7 @@
     <item
         android:id="@+id/menu_profile_manager"
         android:icon="@drawable/ic_profile"
-        android:title="Profile"
+        android:title="Manager profile"
         />
 
 

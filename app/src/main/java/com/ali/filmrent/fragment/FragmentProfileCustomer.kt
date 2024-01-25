@@ -16,6 +16,7 @@ import com.ali.filmrent.activity.KEY_STORE_ID
 import com.ali.filmrent.dataClass.Customer
 import com.ali.filmrent.dataClass.Store
 import com.ali.filmrent.databinding.AddStoreDialogBinding
+import com.ali.filmrent.databinding.DepositDialogBinding
 import com.ali.filmrent.databinding.EditUserDialogBinding
 import com.ali.filmrent.databinding.FragmentProfileCustomerBinding
 import com.ali.filmrent.databinding.FragmentProfileStoreBinding
@@ -59,6 +60,45 @@ class FragmentProfileCustomer : Fragment() {
         customer = customerDao.getCustomerById(customer_id)
 
         showData()
+
+        binding.btnDeposit.setOnClickListener {
+            val dialog = AlertDialog.Builder(this.requireContext()).create()
+            val dialogBinding = DepositDialogBinding.inflate(layoutInflater)
+            dialogBinding.btnDone.text = "deposit"
+            dialogBinding.btnCancel.text = "cancel"
+            dialog.setView(dialogBinding.root)
+            dialog.setCancelable(true)
+            dialog.show()
+            dialogBinding.btnCancel.setOnClickListener {
+                dialog.dismiss()
+            }
+            dialogBinding.btnDone.setOnClickListener {
+                if (dialogBinding.edtDeposit.length() > 0) {
+                    val depositAmount: Int = dialogBinding.edtDeposit.text.toString().toInt()
+                    customerDao.updateWallet(
+                        customer.customer_id!!,
+                        customer.wallet + depositAmount
+                    )
+                    customer = customerDao.getCustomerById(customer_id)
+                    showData()
+                    dialog.dismiss()
+
+                    Toast.makeText(
+                        this.requireContext(),
+                        "deposit was done successfully",
+                        Toast.LENGTH_LONG
+                    ).show()
+                } else {
+                    Toast.makeText(
+                        this.requireContext(),
+                        "Please enter deposit amount",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                }
+            }
+        }
+
 
         binding.fabEditProfile.setOnClickListener {
             val dialog = AlertDialog.Builder(this.requireContext()).create()
