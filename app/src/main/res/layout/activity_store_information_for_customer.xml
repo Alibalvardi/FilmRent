@@ -79,16 +79,6 @@
                     android:layout_gravity="start|center_vertical"
                     android:src="@drawable/ic_profile" />
 
-                <RatingBar
-                    android:id="@+id/item_rating_bar_store"
-                    style="@style/Widget.AppCompat.RatingBar.Small"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end|center"
-                    android:progressTint="@color/yellow"
-
-                    android:rating="3.5" />
-
             </FrameLayout>
 
             <FrameLayout
@@ -169,6 +159,17 @@
                     android:src="@drawable/ic_call" />
 
             </FrameLayout>
+
+            <RatingBar
+                android:id="@+id/item_rating_bar_store"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center"
+                android:layout_marginEnd="20dp"
+                android:progressTint="@color/yellow"
+
+                android:rating="3.5" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/text_field_search"

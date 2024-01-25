@@ -161,42 +161,6 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp">
-
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="start|center"
-    android:text="Sign up as : "
-    android:textColor="?attr/colorPrimary"
-    android:textSize="20sp"
-    android:layout_marginStart="16dp"/>
-        <RadioGroup
-
-            android:id="@+id/radio_group"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginEnd="32dp">
-
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/radioBtn_manager"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Manager" />
-
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/radioBtn_customer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Customer" />
-        </RadioGroup>
-    </FrameLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -23,7 +23,6 @@ class FragmentProfileStore : Fragment() {
 
     private lateinit var binding: FragmentProfileStoreBinding
     private lateinit var storeDao: StoreDao
-    private lateinit var storeBinding : ActivityStoreBinding
     private lateinit var store: Store
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,11 +30,11 @@ class FragmentProfileStore : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentProfileStoreBinding.inflate(inflater, container, false)
-        storeBinding = ActivityStoreBinding.inflate(inflater, container, false)
         return binding.root
     }
 
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -99,7 +98,7 @@ class FragmentProfileStore : Fragment() {
         binding.txtStoreName.text = "Store name : " + store.name
         binding.txtStorePhone.text = "Phone : " + store.phoneNumber
         binding.txtNumberOfFilm.text =
-            "The Number of stors film : " + (AppDatabase.getDatabase(this.requireContext())).boughtInventoryDao.getStoreFilms(
+            "The Number of stores film : " + (AppDatabase.getDatabase(this.requireContext())).boughtInventoryDao.getStoreFilms(
                 store.store_id!!
             ).size
         binding.txtNumberOfCopies.text =

@@ -13,7 +13,7 @@ import com.ali.filmrent.dataClass.Customer
 import com.ali.filmrent.databinding.ActivityCustomerBinding
 import com.ali.filmrent.fragment.FragmentFilmsCustomer
 import com.ali.filmrent.fragment.FragmentMyFilmCustomer
-import com.ali.filmrent.fragment.FragmentMyProfileCustomer
+import com.ali.filmrent.fragment.FragmentProfileCustomer
 import com.ali.filmrent.fragment.FragmentStoresCustomer
 import com.ali.filmrent.roomDatabase.AppDatabase
 import com.ali.filmrent.roomDatabase.CustomerDao
@@ -65,7 +65,7 @@ class CustomerActivity : AppCompatActivity() {
                 }
 
                 R.id.menu_profile_customer -> {
-                    replaceFragment(FragmentMyProfileCustomer())
+                    replaceFragment(FragmentProfileCustomer())
                 }
             }
             true

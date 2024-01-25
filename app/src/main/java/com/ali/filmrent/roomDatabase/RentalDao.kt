@@ -30,6 +30,10 @@ interface RentalDao {
     fun countOfActiveRentsOfFilmInAllStore(filmId: Int): Int
     @Query("SELECT COUNT(*) FROM rental WHERE store_id = :storeId AND film_id=:filmId AND returnDate =0")
     fun countOfActiveRentsOfFilmInStore(storeId: Int, filmId: Int): Int
+    @Query("SELECT COUNT(*) FROM rental WHERE customer_id=:customerId")
+    fun countOfRentsOfCustomer(customerId: Int): Int
+    @Query("SELECT COUNT(*) FROM rental WHERE customer_id=:customerId AND returnDate=0")
+    fun countOfActiveRentsOfCustomer(customerId: Int): Int
 
 
 }
