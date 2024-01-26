@@ -71,6 +71,17 @@ class CustomerActivity : AppCompatActivity() {
             true
         }
         binding.bottomNavigationCustomer.setOnItemReselectedListener {}
+
+        binding.navigationDrawerCustomer.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.menu_customer_reservation_request -> {
+                    val intent = Intent(this, CustomerReservationActivity::class.java)
+                    intent.putExtra(KEY_CUSTOMER_ID, customer.customer_id)
+                    startActivity(intent)
+                }
+            }
+            true
+        }
     }
 
     private fun firstRun() {

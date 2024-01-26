@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         imgStoreDao = AppDatabase.getDatabase(this).imgStoreDao
         calendarDao = AppDatabase.getDatabase(this).calendarDao
         var myCalendar = Calendar.getInstance()
-        val newCalendar = Calendar.getInstance()
+        var newCalendar = Calendar.getInstance()
 
 
         //for insert all film to database in first run
@@ -56,6 +56,12 @@ class MainActivity : AppCompatActivity() {
         } else {
             myCalendar.timeInMillis = calendarDao.getCalendar(1)
             newCalendar.timeInMillis = calendarDao.getCalendar(1)
+            val nowCalendar = Calendar.getInstance()
+            if(nowCalendar.after(myCalendar)){
+                myCalendar = Calendar.getInstance()
+                newCalendar = Calendar.getInstance()
+            }
+
         }
 
         updateTxtDate(myCalendar)
@@ -90,6 +96,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnGoToLogin.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
+
             myCalendar = newCalendar
             calendarDao.updateCalendar(AppCalendar(1, myCalendar.timeInMillis))
             startActivity(intent)

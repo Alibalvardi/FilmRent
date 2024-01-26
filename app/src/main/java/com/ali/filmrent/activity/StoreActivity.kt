@@ -71,7 +71,13 @@ class StoreActivity : AppCompatActivity() {
 
                 R.id.menu_active_rents -> {
                     val intent = Intent(this, ActiveRentsStoreActivity::class.java)
-                    intent.putExtra(KEY_STORE_ID , store.store_id)
+                    intent.putExtra(KEY_STORE_ID, store.store_id)
+                    startActivity(intent)
+                }
+
+                R.id.menu_reservation_request -> {
+                    val intent = Intent(this, AnswerToReservationActivity::class.java)
+                    intent.putExtra(KEY_STORE_ID, store.store_id)
                     startActivity(intent)
                 }
             }
