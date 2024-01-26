@@ -80,13 +80,21 @@ class StoreActivity : AppCompatActivity() {
                     intent.putExtra(KEY_STORE_ID, store.store_id)
                     startActivity(intent)
                 }
+
                 R.id.menu_store_rating -> {
                     val intent = Intent(this, RatingOfStoreActivity::class.java)
                     intent.putExtra(KEY_STORE_ID, store.store_id)
                     startActivity(intent)
                 }
+
                 R.id.menu_payment_store -> {
                     val intent = Intent(this, StorePaymentActivity::class.java)
+                    intent.putExtra(KEY_STORE_ID, store.store_id)
+                    startActivity(intent)
+                }
+
+                R.id.menu_payment_each_customer -> {
+                    val intent = Intent(this, EachCustomerOfStorePaymentActivity::class.java)
                     intent.putExtra(KEY_STORE_ID, store.store_id)
                     startActivity(intent)
                 }

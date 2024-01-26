@@ -31,14 +31,11 @@
 
                 android:title="entire store Payments"
                 /><item
-                android:id="@+id/menu_payment_customer"
+                android:id="@+id/menu_payment_each_customer"
 
                 android:title="each customer Payments"
                 />
-            <item
-                android:id="@+id/menu_payment_film"
 
-                android:title="each film Payments" />
         </menu>
 
     </item>
