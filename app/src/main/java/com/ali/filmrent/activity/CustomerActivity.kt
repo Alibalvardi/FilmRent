@@ -79,6 +79,12 @@ class CustomerActivity : AppCompatActivity() {
                     intent.putExtra(KEY_CUSTOMER_ID, customer.customer_id)
                     startActivity(intent)
                 }
+
+                R.id.menu_customer_rating -> {
+                    val intent = Intent(this, RatingOfCustomerActivity::class.java)
+                    intent.putExtra(KEY_CUSTOMER_ID, customer.customer_id)
+                    startActivity(intent)
+                }
             }
             true
         }

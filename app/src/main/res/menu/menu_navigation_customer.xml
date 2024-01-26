@@ -9,8 +9,8 @@
         />
 
     <item
-        android:id="@+id/menu_store_rating"
-        android:title="S2"
+        android:id="@+id/menu_customer_rating"
+        android:title="rating"
         />
 
     <item

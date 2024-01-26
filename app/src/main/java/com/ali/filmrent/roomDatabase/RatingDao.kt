@@ -23,4 +23,11 @@ interface RatingDao {
 
     @Query("SELECT AVG(rating) FROM Rating WHERE store_id = :store_id")
     fun avgStoreRating(store_id: Int): Float
+    @Query("SELECT * FROM rating WHERE store_id=:storeId")
+    fun listOfRatingOfStore(storeId: Int): List<Rating>
+
+    @Query("SELECT * FROM rating WHERE customer_id=:customerId")
+    fun listOfRatingOfCustomer(customerId: Int): List<Rating>
+
+
 }
