@@ -2,49 +2,29 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-
     <item
         android:id="@+id/menu_customer_reservation_request"
-        android:title="Reservation request"
-        />
+        android:title="Reservation request" />
 
     <item
         android:id="@+id/menu_customer_rating"
-        android:title="rating"
-        />
+        android:title="rating" />
 
     <item
         android:id="@+id/menu_top_selling"
-        android:title="3"
-        />
+        android:title="3" />
 
-    <item android:title="Payment 3">
+    <item android:title="Payment ">
 
         <menu>
 
-
             <item
-                android:id="@+id/menu_payment_store"
-
-                android:title="e4s"
-                /><item
                 android:id="@+id/menu_payment_customer"
+                android:title="Your paymnets" />
 
-                android:title="e5ts"
-                />
-            <item
-                android:id="@+id/menu_payment_film"
-
-                android:title="6s" />
         </menu>
 
     </item>
-
-
-
-
-
-
 
 
 </menu>

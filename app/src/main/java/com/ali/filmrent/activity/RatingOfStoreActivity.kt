@@ -65,7 +65,7 @@ class RatingOfStoreActivity : AppCompatActivity(), RatingEvents {
             ratingDao.listOfRatingOfStore(store.store_id!!)
 
         binding.txtNumberReserve.text =
-            "The number of Rating: " + listOfRatingOfStore.size
+            "The number of Rating : " + listOfRatingOfStore.size
 
         val adapter = RatingAdapter(
             rates = ArrayList(listOfRatingOfStore),

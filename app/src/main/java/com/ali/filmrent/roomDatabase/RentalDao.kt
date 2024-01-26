@@ -36,6 +36,8 @@ interface RentalDao {
     fun countOfRentsOfCustomer(customerId: Int): Int
     @Query("SELECT COUNT(*) FROM rental WHERE customer_id=:customerId AND returnDate=0")
     fun countOfActiveRentsOfCustomer(customerId: Int): Int
+    @Query("SELECT * FROM rental WHERE rental_id=:rentalId")
+    fun getRentById(rentalId: Int): Rental
 
 
 }

@@ -85,6 +85,11 @@ class StoreActivity : AppCompatActivity() {
                     intent.putExtra(KEY_STORE_ID, store.store_id)
                     startActivity(intent)
                 }
+                R.id.menu_payment_store -> {
+                    val intent = Intent(this, StorePaymentActivity::class.java)
+                    intent.putExtra(KEY_STORE_ID, store.store_id)
+                    startActivity(intent)
+                }
             }
             true
         }

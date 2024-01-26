@@ -9,12 +9,11 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.pedant.SweetAlert.SweetAlertDialog
-import com.ali.filmrent.adapter.RatingAdapter
-import com.ali.filmrent.adapter.RatingEvents
+import com.ali.filmrent.adapter.PaymentAdapter
+import com.ali.filmrent.adapter.PaymentEvents
 import com.ali.filmrent.adapter.ReservationAdapter
 import com.ali.filmrent.adapter.ReservationEvents
-import com.ali.filmrent.dataClass.Customer
-import com.ali.filmrent.dataClass.Rating
+import com.ali.filmrent.dataClass.Payment
 import com.ali.filmrent.dataClass.Rental
 import com.ali.filmrent.dataClass.Reserve
 import com.ali.filmrent.dataClass.Store
@@ -24,26 +23,26 @@ import com.ali.filmrent.roomDatabase.AppDatabase
 import com.ali.filmrent.roomDatabase.BoughtInventoryDao
 import com.ali.filmrent.roomDatabase.CustomerDao
 import com.ali.filmrent.roomDatabase.FilmDao
-import com.ali.filmrent.roomDatabase.RatingDao
+import com.ali.filmrent.roomDatabase.PaymentDao
 import com.ali.filmrent.roomDatabase.RentalDao
 import com.ali.filmrent.roomDatabase.ReserveDao
 import com.ali.filmrent.roomDatabase.StoreDao
 import java.util.Calendar
 
-class RatingOfCustomerActivity : AppCompatActivity(), RatingEvents {
+class StorePaymentActivity : AppCompatActivity(), PaymentEvents {
     private lateinit var binding: ActivityAnswerToReservationBinding
-    private lateinit var customerDao: CustomerDao
-    private lateinit var ratingDao: RatingDao
-    private lateinit var customer: Customer
+    private lateinit var storeDao: StoreDao
+    private lateinit var paymentDao: PaymentDao
+    private lateinit var store: Store
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAnswerToReservationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        customerDao = AppDatabase.getDatabase(this).customerDao
-        ratingDao = AppDatabase.getDatabase(this).ratingDao
-        customer = customerDao.getCustomerById(intent.getIntExtra(KEY_CUSTOMER_ID, 0))
+        storeDao = AppDatabase.getDatabase(this).storeDao
+        paymentDao = AppDatabase.getDatabase(this).paymentDao
+        store = storeDao.getStoreById(intent.getIntExtra(KEY_STORE_ID, 0))
 
         showData()
 
@@ -61,26 +60,26 @@ class RatingOfCustomerActivity : AppCompatActivity(), RatingEvents {
 
     @SuppressLint("SetTextI18n")
     private fun showData() {
-        binding.toolbarReserve.title = "Rating to each Store"
-        val listOfRatingOfCustomer: List<Rating> =
-            ratingDao.listOfRatingOfCustomer(customer.customer_id!!)
+        binding.toolbarReserve.title = "All payments"
+        val listPaymentOfStore: List<Payment> =
+            paymentDao.listPaymentsOfStore(store.store_id!!)
 
         binding.txtNumberReserve.text =
-            "The number of Rating : " + listOfRatingOfCustomer.size
+            "The number of Payment : " + listPaymentOfStore.size
 
-        val adapter = RatingAdapter(
-            rates = ArrayList(listOfRatingOfCustomer),
+        val adapter = PaymentAdapter(
+            payments = ArrayList(listPaymentOfStore),
             itemEvents = this,
-            false,
+            true,
             AppDatabase.getDatabase(this)
         )
         binding.recycleReserve.layoutManager =
             LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         binding.recycleReserve.adapter = adapter
+
     }
 
 
-
-    override fun onClickedItem(rating: Rating) {
+    override fun onClickedItem(payment: Payment) {
     }
 }

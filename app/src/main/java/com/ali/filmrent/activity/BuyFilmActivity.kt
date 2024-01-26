@@ -9,17 +9,21 @@ import androidx.core.content.ContextCompat
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.ali.filmrent.dataClass.BoughtInventory
 import com.ali.filmrent.dataClass.Film
+import com.ali.filmrent.dataClass.Payment
 import com.ali.filmrent.databinding.ActivityBuyFilmBinding
 import com.ali.filmrent.fragment.KEY_FILM_ID
 import com.ali.filmrent.roomDatabase.AppDatabase
 import com.ali.filmrent.roomDatabase.BoughtInventoryDao
 import com.ali.filmrent.roomDatabase.FilmDao
+import com.ali.filmrent.roomDatabase.PaymentDao
 import com.bumptech.glide.Glide
+import java.util.Calendar
 
 class BuyFilmActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBuyFilmBinding
     private lateinit var film: Film
     private lateinit var filmDao: FilmDao
+    private lateinit var paymentDao: PaymentDao
     private lateinit var boughtInventoryDao: BoughtInventoryDao
 
     @SuppressLint("SetTextI18n")
@@ -29,6 +33,7 @@ class BuyFilmActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         filmDao = AppDatabase.getDatabase(this).filmDao
+        paymentDao = AppDatabase.getDatabase(this).paymentDao
         boughtInventoryDao = AppDatabase.getDatabase(this).boughtInventoryDao
         val film_id: Int = intent.getIntExtra(KEY_FILM_ID, 0)
         val store_id = intent.getIntExtra(KEY_STORE_ID, 0)
@@ -119,14 +124,22 @@ class BuyFilmActivity : AppCompatActivity() {
         val manager_id = (AppDatabase.getDatabase(this).storeDao).getStoreManagerId(store_id)
         val wallet =
             (AppDatabase.getDatabase(this).managerDao).getManagerById(manager_id).wallet
-
-
+        val nowCalendar = AppDatabase.getDatabase(this).calendarDao.getCalendar(1)
 
         if (wallet >= invoice) {
             (AppDatabase.getDatabase(this).managerDao).updateWallet(manager_id, wallet - invoice)
-
+            paymentDao.insertPayment(
+                Payment(
+                    customer_id = 0,
+                    store_id = store_id,
+                    rental_id = film_id,
+                    amount = invoice,
+                    settlementDate =nowCalendar
+                )
+            )
             for (i in 1..numberOFFilm) {
                 boughtInventoryDao.insert(BoughtInventory(film_id = film_id, store_id = store_id))
+
             }
             Toast.makeText(this, "Your purchase was successful", Toast.LENGTH_SHORT).show()
         } else {
