@@ -39,10 +39,10 @@ class FilmAdapter(
 
             binding.txtFilmName.text = film.title
             binding.txtFilmYear.text = film.yearOfRelease.toString()
-            binding.txtFilmCategory.text = film.category.name
+            binding.txtFilmCategory.text = film.category
             binding.txtFilmLength.text = film.length.toString() + " min"
-            binding.txtFilmActor.text = film.actor.name
-            binding.txtFilmLanguage.text = film.language.name
+            binding.txtFilmActor.text = film.actor
+            binding.txtFilmLanguage.text = film.language
             binding.txtFilmDescription.text = film.description
             binding.itemRatingBarFilm.rating = film.rating
             binding.txtFilmNumber.text = (adapterPosition + 1).toString()

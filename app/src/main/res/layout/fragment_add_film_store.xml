@@ -12,31 +12,62 @@
         android:background="@drawable/background_top_store">
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/menu_category"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="32dp"
+            android:hint="Category"
+            app:boxBackgroundColor="?attr/colorOnPrimary"
+            app:boxCornerRadiusBottomEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxCornerRadiusTopStart="8dp"
+            app:hintTextColor="?attr/colorOnSecondary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <AutoCompleteTextView
+                android:id="@+id/edt_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInput_search"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="24dp"
             android:hint="Search ..."
-            android:textColorHint="?attr/colorPrimary"
+            android:textColorHint="?attr/colorOnSecondary"
             app:boxBackgroundColor="?attr/colorOnPrimary"
+            app:boxCornerRadiusBottomEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxCornerRadiusTopStart="8dp"
             app:boxStrokeWidth="2dp"
-            app:endIconMode="clear_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:startIconDrawable="@drawable/ic_search">
 
 
-            <com.google.android.material.textfield.TextInputEditText
+<!--            <com.google.android.material.textfield.TextInputEditText-->
+<!--                android:id="@+id/edt_search"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textSize="16sp" />-->
+            <AutoCompleteTextView
                 android:id="@+id/edt_search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-
-                />
+                android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -50,8 +81,6 @@
         android:layout_height="wrap_content">
 
     </androidx.recyclerview.widget.RecyclerView>
-
-
 
 
 </LinearLayout>

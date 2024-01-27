@@ -119,9 +119,9 @@ class MainActivity : AppCompatActivity() {
             Film(
                 title = "Avatar: The Way of Water",
                 yearOfRelease = 2022,
-                language = Language(name = "English"),
-                category = Category(name = "Action"),
-                actor = Actor(name = "Sam Worthington"),
+                language = "English",
+                category = "Action",
+                actor = "Sam Worthington",
                 rating = 3.5f,
                 length = 192,
                 rentDuration = 14,
@@ -132,9 +132,9 @@ class MainActivity : AppCompatActivity() {
             ), Film(
                 title = "Oppenheimer",
                 yearOfRelease = 2023,
-                language = Language(name = "English"),
-                category = Category(name = "Thriller"),
-                actor = Actor(name = "Cillian Murphy"),
+                language = "English",
+                category =  "Thriller",
+                actor = "Cillian Murphy",
                 rating = 4.0f,
                 length = 181,
                 rentDuration = 14,
@@ -145,9 +145,9 @@ class MainActivity : AppCompatActivity() {
             ), Film(
                 title = "Deportees 2",
                 yearOfRelease = 2009,
-                language = Language(name = "persian"),
-                category = Category(name = "Comedy"),
-                actor = Actor(name = "Amin Hayai"),
+                language ="persian",
+                category = "Comedy",
+                actor = "Amin Hayai",
                 rating = 1.5f,
                 length = 116,
                 rentDuration = 14,
@@ -158,9 +158,9 @@ class MainActivity : AppCompatActivity() {
             ), Film(
                 title = "Avengers: Endgame",
                 yearOfRelease = 2019,
-                language = Language(name = "English"),
-                category = Category(name = "Sci-fi"),
-                actor = Actor(name = "Robert Downey Jr."),
+                language = "English",
+                category = "Sci-fi",
+                actor = "Robert Downey Jr.",
                 rating = 4.5f,
                 length = 182,
                 rentDuration = 14,
@@ -171,9 +171,9 @@ class MainActivity : AppCompatActivity() {
             ), Film(
                 title = "La Haine",
                 yearOfRelease = 1995,
-                language = Language(name = "French"),
-                category = Category(name = "Crime"),
-                actor = Actor(name = "Vincent Cassel"),
+                language = "French",
+                category = "Crime",
+                actor ="Vincent Cassel",
                 rating = 4.0f,
                 length = 98,
                 rentDuration = 14,
@@ -184,9 +184,9 @@ class MainActivity : AppCompatActivity() {
             ), Film(
                 title = "Dune",
                 yearOfRelease = 2021,
-                language = Language(name = "English"),
-                category = Category(name = "Sci-fi"),
-                actor = Actor(name = "Timothée Chalamet"),
+                language = "English",
+                category ="Sci-fi",
+                actor = "Timothée Chalamet",
                 rating = 4.0f,
                 length = 145,
                 rentDuration = 14,
@@ -197,9 +197,9 @@ class MainActivity : AppCompatActivity() {
             ), Film(
                 title = "Fast X",
                 yearOfRelease = 2023,
-                language = Language(name = "English"),
-                category = Category(name = "Action"),
-                actor = Actor(name = "Vin Diesel"),
+                language = "English",
+                category = "Action",
+                actor = "Vin Diesel",
                 rating = 3.0f,
                 length = 141,
                 rentDuration = 14,
@@ -210,9 +210,9 @@ class MainActivity : AppCompatActivity() {
             ), Film(
                 title = " The Shawshank Redemption",
                 yearOfRelease = 1994,
-                language = Language(name = "English"),
-                category = Category(name = "Drama"),
-                actor = Actor(name = "Tim Robbins"),
+                language = "English",
+                category = "Drama",
+                actor = "Tim Robbins",
                 rating = 4.5f,
                 length = 144,
                 rentDuration = 14,
@@ -223,9 +223,9 @@ class MainActivity : AppCompatActivity() {
             ), Film(
                 title = "Sausage Party",
                 yearOfRelease = 2016,
-                language = Language(name = "English"),
-                category = Category(name = "Animation"),
-                actor = Actor(name = "Seth Rogen"),
+                language =  "English",
+                category = "Animation",
+                actor = "Seth Rogen",
                 rating = 3.0f,
                 length = 89,
                 rentDuration = 14,
@@ -236,9 +236,9 @@ class MainActivity : AppCompatActivity() {
             ), Film(
                 title = "The Holdovers",
                 yearOfRelease = 2023,
-                language = Language(name = "English"),
-                category = Category(name = "Drama"),
-                actor = Actor(name = "Paul Giamatti"),
+                language = "English",
+                category = "Drama",
+                actor = "Paul Giamatti",
                 rating = 4.0f,
                 length = 133,
                 rentDuration = 14,
@@ -249,9 +249,9 @@ class MainActivity : AppCompatActivity() {
             ), Film(
                 title = "The Godfather",
                 yearOfRelease = 1972,
-                language = Language(name = "English"),
-                category = Category(name = "Crime"),
-                actor = Actor(name = "AL Pacino"),
+                language =  "English",
+                category = "Crime",
+                actor ="AL Pacino",
                 rating = 4.6f,
                 length = 175,
                 rentDuration = 14,
@@ -262,9 +262,9 @@ class MainActivity : AppCompatActivity() {
             ), Film(
                 title = "12 Angry Men",
                 yearOfRelease = 1957,
-                language = Language(name = "English"),
-                category = Category(name = "Drama"),
-                actor = Actor(name = "Henry FondaLee"),
+                language = "English",
+                category = "Drama",
+                actor = "Henry FondaLee",
                 rating = 4.5f,
                 length = 96,
                 rentDuration = 14,
@@ -293,9 +293,9 @@ class MainActivity : AppCompatActivity() {
         calendarDao.insert(AppCalendar(calendar = myCalendar.timeInMillis))
 
         for (item in filmList) {
-            actorDao.insertActor(item.actor)
-            languageDao.insertLanguage(item.language)
-            categoryDao.insertCategory(item.category)
+            actorDao.insertActor(Actor(name = item.actor))
+            languageDao.insertLanguage(Language(name = item.language))
+            categoryDao.insertCategory(Category(name = item.category))
         }
 
     }

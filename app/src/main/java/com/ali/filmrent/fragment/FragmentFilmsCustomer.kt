@@ -42,7 +42,7 @@ class FragmentFilmsCustomer : Fragment() , FilmEvents {
 
         filmDao = AppDatabase.getDatabase(this.requireContext()).filmDao
 
-        val allFilmList: List<Film> = filmDao.getAllFilms()
+        val allFilmList: List<Film> = filmDao.getAllFilms("")
 
 
 

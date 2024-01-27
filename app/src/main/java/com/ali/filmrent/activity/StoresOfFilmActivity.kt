@@ -57,9 +57,9 @@ class StoresOfFilmActivity : AppCompatActivity(), StoreEvents {
         binding.txtFilmTitle.text = film.title
         binding.txtFilmYear.text = film.yearOfRelease.toString()
         binding.txtFilmLength.text = film.length.toString() + " min"
-        binding.txtFilmCategory.text = film.category.name
-        binding.txtFilmActor.text = film.actor.name
-        binding.txtFilmLanguage.text = "Language : " + film.language.name
+        binding.txtFilmCategory.text = film.category
+        binding.txtFilmActor.text = film.actor
+        binding.txtFilmLanguage.text = "Language : " + film.language
         binding.txtFilmDescription.text = film.description
         binding.itemRatingbarFilm.rating = film.rating
 
