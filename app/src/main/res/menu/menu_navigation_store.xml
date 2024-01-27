@@ -3,23 +3,22 @@
 
     <item
         android:id="@+id/menu_active_rents"
-        android:title="َActive rents"
-       />
+        android:title="َActive rents" />
 
     <item
         android:id="@+id/menu_reservation_request"
-        android:title="Reservation request"
-        />
+        android:title="Reservation request" />
 
     <item
         android:id="@+id/menu_store_rating"
-        android:title="Store rating"
-        />
+        android:title="Store rating" />
 
     <item
+        android:id="@+id/menu_store_rented_film"
+        android:title="Rented film" />
+    <item
         android:id="@+id/menu_top_selling"
-        android:title="Top_selling"
-        />
+        android:title="Top_selling" />
 
     <item android:title="Payment information">
 
@@ -29,22 +28,15 @@
             <item
                 android:id="@+id/menu_payment_store"
 
-                android:title="entire store Payments"
-                /><item
+                android:title="entire store Payments" />
+            <item
                 android:id="@+id/menu_payment_each_customer"
 
-                android:title="each customer Payments"
-                />
+                android:title="each customer Payments" />
 
         </menu>
 
     </item>
-
-
-
-
-
-
 
 
 </menu>

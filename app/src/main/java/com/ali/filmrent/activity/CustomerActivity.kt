@@ -85,6 +85,11 @@ class CustomerActivity : AppCompatActivity() {
                     intent.putExtra(KEY_CUSTOMER_ID, customer.customer_id)
                     startActivity(intent)
                 }
+                R.id.menu_customer_rented_film -> {
+                    val intent = Intent(this, CustomerRentedFilmActivity::class.java)
+                    intent.putExtra(KEY_CUSTOMER_ID, customer.customer_id)
+                    startActivity(intent)
+                }
                 R.id.menu_payment_customer -> {
                     val intent = Intent(this, CustomerPaymentActivity::class.java)
                     intent.putExtra(KEY_CUSTOMER_ID, customer.customer_id)

@@ -11,8 +11,8 @@
         android:title="rating" />
 
     <item
-        android:id="@+id/menu_top_selling"
-        android:title="3" />
+        android:id="@+id/menu_customer_rented_film"
+        android:title="Rented film" />
 
     <item android:title="Payment ">
 

@@ -38,6 +38,10 @@ interface RentalDao {
     fun countOfActiveRentsOfCustomer(customerId: Int): Int
     @Query("SELECT * FROM rental WHERE rental_id=:rentalId")
     fun getRentById(rentalId: Int): Rental
+    @Query("SELECT * FROM rental WHERE store_id=:storeId AND returnDate!=0")
+    fun listRentedFilmOfStore(storeId: Int): List<Rental>
+    @Query("SELECT * FROM rental WHERE customer_id=:customerId AND returnDate!=0 ")
+    fun listRentedFilmOfCustomer(customerId: Int): List<Rental>
 
 
 }

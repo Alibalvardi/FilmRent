@@ -74,6 +74,12 @@
             android:name=".activity.EachCustomerOfStorePaymentActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.CustomerRentedFilmActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.StoreRentedFilmActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.MainActivity"
             android:exported="true">
             <intent-filter>
