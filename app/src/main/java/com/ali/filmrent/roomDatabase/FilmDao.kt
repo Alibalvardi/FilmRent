@@ -19,8 +19,6 @@ interface FilmDao {
     fun getFilmsById(storeFilmsId: List<Int>): List<Film>
     @Query("SELECT * FROM film WHERE title LIKE '%'|| :searching || '%' AND category LIKE'%'|| :category || '%'")
     fun searchTitleFilms(searching: String , category: String): List<Film>
-    @Query("SELECT * FROM film WHERE category LIKE :category")
-    fun getCategoryFilm(category: String): List<Film>
 
     @Query("SELECT * FROM film WHERE actor LIKE '%'|| :searching || '%' AND category LIKE'%'|| :category || '%'")
     fun searchActorFilms(searching: String , category: String): List<Film>
@@ -28,7 +26,8 @@ interface FilmDao {
     @Query("SELECT * FROM film WHERE language LIKE '%'|| :searching || '%' AND category LIKE'%'|| :category || '%'")
     fun searchLanguageFilms(searching: String , category: String): List<Film>
 
-
     @Query("SELECT * FROM film WHERE yearOfRelease LIKE '%'|| :searching || '%' AND category LIKE'%'|| :category || '%'")
     fun searchYearFilms(searching: String , category: String): List<Film>
+    @Query("SELECT * FROM film WHERE category LIKE'%'|| :category || '%' ORDER BY rating DESC")
+    fun getAllFilmsByTopRate(category: String): List<Film>
 }

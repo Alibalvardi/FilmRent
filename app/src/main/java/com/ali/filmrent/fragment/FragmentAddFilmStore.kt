@@ -19,6 +19,7 @@ import com.ali.filmrent.databinding.FragmentAddFilmStoreBinding
 import com.ali.filmrent.roomDatabase.AppDatabase
 import com.ali.filmrent.roomDatabase.CategoryDao
 import com.ali.filmrent.roomDatabase.FilmDao
+import kotlin.properties.Delegates
 
 const val KEY_FILM_ID = "key_film_id"
 
@@ -29,6 +30,7 @@ class FragmentAddFilmStore : Fragment(), FilmEvents {
     private lateinit var categoryDao: CategoryDao
     private lateinit var category: String
     private lateinit var search: String
+    private var topRate: Boolean = false
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -61,12 +63,7 @@ class FragmentAddFilmStore : Fragment(), FilmEvents {
 
         binding.edtCategory.setOnItemClickListener { adapterView, _, position, _ ->
             category = adapterView.getItemAtPosition(position).toString()
-            if (category == "all category") {
-                category = ""
-                showData(filmDao.getAllFilms(category))
-            } else {
-                showData(filmDao.getCategoryFilm(category))
-            }
+            setCategory()
         }
 
         val itemSearch = listOf("Title", "Actor", "Language", "Year of release")
@@ -76,6 +73,8 @@ class FragmentAddFilmStore : Fragment(), FilmEvents {
             itemSearch
         )
         binding.edtSearch.setAdapter(searchAdapter)
+
+
         binding.edtSearch.setOnItemClickListener { adapterView, _, position, _ ->
             search = adapterView.getItemAtPosition(position).toString()
             binding.edtSearch.setText("")
@@ -87,8 +86,24 @@ class FragmentAddFilmStore : Fragment(), FilmEvents {
             searchOnDatabase(edtText!!.toString())
         }
 
+        binding.switchTopRate.setOnCheckedChangeListener { _, isChecked ->
+            topRate = isChecked
+            setCategory()
+        }
+
     }
 
+    private fun setCategory() {
+        if (topRate) {
+            if (category == "all category")
+                category = ""
+            showData(filmDao.getAllFilmsByTopRate(category))
+        } else {
+            if (category == "all category")
+                category = ""
+            showData(filmDao.getAllFilms(category))
+        }
+    }
 
     private fun searchOnDatabase(searching: String) {
         when (search) {
