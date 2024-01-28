@@ -148,17 +148,100 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="16dp"
                 android:background="@color/gray_light" />
-
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="film information"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/txt_numberOfFilm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:text="12"
                 android:textColor="?attr/colorOnSecondary"
                 android:textSize="18sp" />
+            <TextView
+                android:id="@+id/txt_number_of_available_cope"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="12"
+                android:textColor="?attr/colorOnSecondary"
+                android:textSize="18sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/gray_light" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Rent information"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/txt_numberOfRented"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="12"
+                android:textColor="?attr/colorOnSecondary"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/txt_numberOfActive_rent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="12"
+                android:textColor="?attr/colorOnSecondary"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/txt_numberOf_late"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="12"
+                android:textColor="?attr/colorOnSecondary"
+                android:textSize="18sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/gray_light" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Payment information"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/txt_payment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="12"
+                android:textColor="?attr/colorOnSecondary"
+                android:textSize="18sp" />
+
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
